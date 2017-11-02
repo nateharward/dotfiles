@@ -134,6 +134,10 @@ call plug#begin('~/.vim/plugged')
   " A modern vim plugin for editing LaTeX files.
   Plug 'lervag/vimtex'
 
+  " Log file highlighting 
+  " TODO merge into vim-intel repo
+  Plug '~/repos/logs-sim'
+
 """
 
 """ Tags, Searching, showing heiarchy, files
@@ -190,6 +194,9 @@ call plug#begin('~/.vim/plugged')
 
   " comment lines in a program
   Plug 'vim-scripts/EnhCommentify.vim'
+
+  " Vim script for text filtering and alignment
+  Plug 'godlygeek/tabular'
 """
 
 """ Etc/Misc
@@ -585,14 +592,15 @@ nmap <leader>d :colorscheme default<CR>
 " Shortcut to auto-format. Requires vim-autoformat plugin
 nmap <leader>af :Autoformat<CR>
 
-" Ctrl-left/right change tabs, Alt-left/right move tabs ----------------------
-"nnoremap <C-Left> :tabprevious<CR>
-"nnoremap <C-Right> :tabnext<CR>
+" Shift + Direction to Move Tabs ----------------------
+nnoremap <silent> <S-h> :execute 'silent! tabmove ' . (tabpagenr()-2)<CR>
+nnoremap <silent> <S-l> :execute 'silent! tabmove ' . (tabpagenr()+1)<CR>
+
+" Ctrl + Direction to Change Tabs ---------------------------------------------
+" Who has time to type gt and gT? Not me. Using shift and a direction to change
+" tabs is a great alternative.
 nnoremap <C-h> :tabprevious<CR>
 nnoremap <C-l> :tabnext<CR>
-nnoremap <silent> <A-Left> :execute 'silent! tabmove ' . (tabpagenr()-2)<CR>
-nnoremap <silent> <A-Right> :execute 'silent! tabmove ' . (tabpagenr()+1)<CR>
-
 
 " Control + n, p for next and prev -------------------------------------------
 noremap <C-n> :next<CR>
@@ -633,12 +641,6 @@ set pastetoggle=<leader>z
 " a visual selection with Q.
 nnoremap Q @q
 vnoremap Q :norm @q<cr>
-
-" Shift + Direction to Change Tabs ---------------------------------------------
-" Who has time to type gt and gT? Not me. Using shift and a direction to change
-" tabs is a great alternative.
-noremap <S-l> gt
-noremap <S-h> gT
 
 " Control + Direction to Change Panes ------------------------------------------
 " Same thing goes for changing panes, but these use control . Skip that pesky w
@@ -736,8 +738,10 @@ vmap <silent> <expr> p <sid>Repl()
 " Type 12<Enter> to go to line 12 (12G breaks my wrist)
 " Hit Enter to go to end of file.
 " Hit Backspace to go to beginning of file. FIXME on linux
-nnoremap <CR> G
-nnoremap <BS> gg
+" XXX not a huge fan of these bindings but I like the concept of mapping
+" normal mode BS and CR to something
+" nnoremap <CR> G
+" nnoremap <BS> gg
 
 
 "----------------------------------------------------------------------------
