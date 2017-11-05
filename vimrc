@@ -99,7 +99,13 @@ inoremap <C-U> <C-G>u<C-U>
 " TODO gui-buttons
 " logs-sim
 " task
-"
+
+" Download plugin manager if not already downloaded
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent execute "!curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
+  autocmd VimEnter * PlugInstall | source $MYVIMRC
+endif
+
 call plug#begin('~/.vim/plugged')
 
 """ Source control extentions
@@ -414,6 +420,15 @@ let g:gitgutter_eager = 0
 " you don't prefer this behaviour, add this line
 let g:workspace_autosave_untrailspaces = 0
 
+" Use TMUX window name in the workspace session save to isolate sessions
+if empty($TMUX)
+   let g:workspace_session_name = 'Session.vim'
+else
+   let g:tmux_window_name = systemlist( "tmux display-message -p '#W'")[0]
+   let g:workspace_session_name = g:tmux_window_name . '-session.vim'
+endif
+
+" Airline
 let g:airline_powerline_fonts = 1
 " let g:airline_theme='base16_eighties'
 let g:airline_theme='base16_flat'
