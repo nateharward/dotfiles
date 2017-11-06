@@ -8,3 +8,8 @@ ln -sv ${BASEDIR}/vimrc ~/.vimrc
 
 # tmux 
 ln -sv ${BASEDIR}/tmux.conf ~/.tmux.conf
+
+# bash
+ln -sv ${BASEDIR}/bashrc ~/.bashrc.${USER}
+
+echo "Add source ~/.bashrc.${USER} to your .bashrc file"

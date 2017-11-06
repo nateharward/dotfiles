@@ -1,11 +1,6 @@
 "
-" Nathan Harward's Vim RC
+" Nate Harward's Vim RC
 "
-
-" TODO
-" * checkout this addon: http://valloric.github.io/YouCompleteMe/
-" * and anything else from here:
-" https://github.com/JohnMorales/dotfiles/blob/master/vimrc
 
 " This must be first, because it changes other options as side effect
 set nocompatible
@@ -150,6 +145,9 @@ call plug#begin('~/.vim/plugged')
 
   " A tree explorer plugin for vim. 
   Plug 'scrooloose/nerdtree'
+  " Close vim if the only window left open is a NERDTree
+  autocmd bufenter * if (winnr('$') == 1 && exists('b:NERDTree')
+     \ && b:NERDTree.isTabTree()) | q | endif
 
   " A plugin of NERDTree showing git status
   " NOTE dependancy on scrooloose/nerdtree
@@ -177,6 +175,38 @@ call plug#begin('~/.vim/plugged')
   " Automated tag file generation and syntax highlighting of tags in Vim http://peterodding.com/code/vim/easytags
   " TODO this might require additional setup to make it scale with large projects: https://github.com/xolox/vim-easytags
   " TODO introduce when ready Plug 'xolox/vim-easytags'
+
+  " To place, toggle, display and navigate marks
+  Plug 'kshenoy/vim-signature'
+  " Keymap:
+  " mx        Toggle mark 'x' where x is a-zA-Z
+  " dmx       Remove mark 'x' where x is a-zA-Z
+  " m,        Place the next available mark
+  " m.        If no mark on line, place the next available mark
+  " m-        Delete all marks from the current line
+  " m/        Open location list and display marks
+  " m<Space>  Delete all marks from the current buffer
+  " m[0-9]    Toggle the corresponding marker !@#$%^&*()
+  " m<S-[0-9]>Remove all markers of the same type
+  " m?        Open location list and display markers
+  " m<BS>     Remove all markers
+  " ]`        Jump to next mark
+  " [`        Jump to prev mark
+  " ]'        Jump to start of next line containg a mark
+  " ['        Jump to start of prev line containg a mark
+  " Highlight signs of marks dynamically based upon state
+  " indicated by vim-signify
+  let g:SignatureMarkTextHLDynamic=1
+
+  " Eclipse like task list
+  Plug 'vim-scripts/TaskList.vim'
+  " Map TaskList to <leader>T
+"  nnoremap <silent> <leader>T :TaskList<CR>
+
+  " NERDTree and tabs together in Vim
+  Plug 'jistr/vim-nerdtree-tabs', { 'on': 'NERDTreeTabsToggle' }
+  " Map NERDTreeToggle to <F11>
+"  nnoremap <silent> <leader>y :NERDTreeTabsToggle<CR>
 
 """
 
@@ -682,7 +712,7 @@ nnoremap <leader>w :ToggleWorkspace<CR>
 
 " Open Nerd Tree
 " Dependant on plugin scrooloose/nerdtree
-map <leader>t :NERDTreeToggle<CR>
+nnoremap <leader>T :NERDTreeToggle<CR>
 
 " Save File with Leader + s ----------------------------------------------------
 " If you're like me and you like to constantly save files, this one is nice.
