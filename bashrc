@@ -3,7 +3,7 @@ BASE16_SHELL=$HOME/repos/base16-shell/
 
 
 # Path to the bash it configuration
-export BASH_IT="~/repos/dotfiles/bash-it"
+export BASH_IT="$HOME/repos/dotfiles/bash-it"
 
 # Lock and Load a custom theme file
 # location /.bash_it/themes/
