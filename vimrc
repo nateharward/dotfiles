@@ -756,7 +756,8 @@ else
 endif
 
 " copy all - everything in the file
-nnoremap <leader>ca :%y+<CR>
+" TODO find a mapping other than leader-ca so that it doesn't slow down leader-c
+"nnoremap <leader>ca :%y+<CRa >
 
 " Text search object
 " It allows me to use the following search-and-replace flow:
