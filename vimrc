@@ -79,7 +79,6 @@ endif
 
 inoremap <C-U> <C-G>u<C-U>
 
-
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Load Plugins
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -92,7 +91,6 @@ inoremap <C-U> <C-G>u<C-U>
 """execute pathogen#infect('bundle_2/{}')
 """
 " TODO gui-buttons
-" logs-sim
 " task
 
 " Download plugin manager if not already downloaded
@@ -135,15 +133,15 @@ call plug#begin('~/.vim/plugged')
   " A modern vim plugin for editing LaTeX files.
   Plug 'lervag/vimtex'
 
-  " Log file highlighting 
+  " Log file highlighting
   " TODO merge into vim-intel repo
-  Plug '~/repos/logs-sim'
+  Plug '~/repos/logssim'
 
 """
 
 """ Tags, Searching, showing heiarchy, files
 
-  " A tree explorer plugin for vim. 
+  " A tree explorer plugin for vim.
   Plug 'scrooloose/nerdtree'
   " Close vim if the only window left open is a NERDTree
   autocmd bufenter * if (winnr('$') == 1 && exists('b:NERDTree')
@@ -151,7 +149,7 @@ call plug#begin('~/.vim/plugged')
 
   " A plugin of NERDTree showing git status
   " NOTE dependancy on scrooloose/nerdtree
-  " XXX too slow on large models, find a way to speed up 
+  " XXX too slow on large models, find a way to speed up
   " Plug 'Xuyuanp/nerdtree-git-plugin'
 
   " Vim plugin for the Perl module / CLI script 'ack'
@@ -171,6 +169,11 @@ call plug#begin('~/.vim/plugged')
 
   " Vim plugin that displays tags in a window, ordered by scope
   " Plug 'majutsushi/tagbar'
+
+  " Make tag jumping in vim behave more like other IDE
+  " XXX Trying this out temporarily
+  " Use Ctrl-] to jump to tag and Ctrl-t to jump back
+  Plug 'ipod825/TagJump'
 
   " Automated tag file generation and syntax highlighting of tags in Vim http://peterodding.com/code/vim/easytags
   " TODO this might require additional setup to make it scale with large projects: https://github.com/xolox/vim-easytags
@@ -359,9 +362,11 @@ if has('gui_running')
   "if exists('g:base16-vim')
      " colorscheme base16-eighties
       colorscheme base16-flat
+      let g:airline_theme='base16_flat'
   "endif
   if has("gui_gtk2")
-     set guifont=Inconsolata-g\ Medium\ 11
+     set guifont=MesloLGMDZ\ Nerd\ Font\ 11
+"     set guifont=Inconsolata-g\ Medium\ 11
      "set guifont=Droid\ Sans\ Mono\ for\ Powerline\ Plus\ Nerd\ File\ Types\ 11
      "set gfn=Inconsolata-g\ for\ Powerline\ Medium\ 11
      "set gfn=InconsolataForPowerline\ Nerd\ Font\ Medium\ 12
@@ -530,8 +535,11 @@ au CursorMovedI * :silent! :syntax sync fromstart<cr>:redraw!<cr>
 augroup mynotes
     "clears previous times this group was sourced
    autocmd!
-   autocmd FileType todo let g:auto_save = 1
+"   autocmd FileType todo let g:auto_save = 1
+   autocmd BufRead,BufNewFile todo let g:auto_save = 1
+   autocmd BufRead,BufNewFile todo set filetype=markdown
    autocmd BufRead,BufNewFile notes let g:auto_save = 1
+   autocmd BufRead,BufNewFile notes set filetype=markdown
    "autocmd FileType notes set g:auto_save
    "autocmd FileType todo set g:auto_save
 augroup END
@@ -701,7 +709,6 @@ noremap <Down> <C-w>j
 noremap <Left> <C-w>h
 noremap <Right> <C-w>l
 
-
 " Quit Files with Leader + q ---------------------------------------------------
 " Quickly close a file with <leader>q.
 noremap <leader>q :q<cr>
@@ -787,7 +794,6 @@ vmap <silent> <expr> p <sid>Repl()
 " normal mode BS and CR to something
 " nnoremap <CR> G
 " nnoremap <BS> gg
-
 
 "----------------------------------------------------------------------------
 " AUTO RELOAD
