@@ -365,7 +365,7 @@ if has('gui_running')
       let g:airline_theme='base16_flat'
   "endif
   if has("gui_gtk2")
-     set guifont=MesloLGMDZ\ Nerd\ Font\ 11
+     set guifont=MesloLGSDZ\ Nerd\ Font\ 11
 "     set guifont=Inconsolata-g\ Medium\ 11
      "set guifont=Droid\ Sans\ Mono\ for\ Powerline\ Plus\ Nerd\ File\ Types\ 11
      "set gfn=Inconsolata-g\ for\ Powerline\ Medium\ 11
@@ -619,6 +619,19 @@ noremap <silent><F12> :call quickmenu#toggle(0)<cr>
 " Use jj for escape ----------------------------------------------------------
 :imap jj <Esc>
 
+" Make * or # work with visually selected text in addition to its normal function
+" Search for selected text, forwards or backwards.
+vnoremap <silent> * :<C-U>
+  \let old_reg=getreg('"')<Bar>let old_regtype=getregtype('"')<CR>
+  \gvy/<C-R><C-R>=substitute(
+  \escape(@", '/\.*$^~['), '\_s\+', '\\_s\\+', 'g')<CR><CR>
+  \gV:call setreg('"', old_reg, old_regtype)<CR>
+vnoremap <silent> # :<C-U>
+  \let old_reg=getreg('"')<Bar>let old_regtype=getregtype('"')<CR>
+  \gvy?<C-R><C-R>=substitute(
+  \escape(@", '?\.*$^~['), '\_s\+', '\\_s\\+', 'g')<CR><CR>
+  \gV:call setreg('"', old_reg, old_regtype)<CR>
+
 " bind K to grep word under cursor
 nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
 
@@ -670,8 +683,19 @@ nnoremap <leader>ev :split $MYVIMRC<CR>
 " Quickly reload vimrc -------------------------------------------------------
 nnoremap <leader>sv :source $MYVIMRC<CR>
 
+" load my base-16 color scheme (handy when reattaching tmuxs in different terminals)
+nnoremap <leader>sb :source ~/.vimrc_background<CR>
+
 " Set working directory
 nnoremap <leader>. :lcd %:p:h<CR>
+
+" Filter to search result LEADER + / 
+" :redir @a         redirect output to register a
+" :g//              repeat last global command
+" :redir END        end redirection
+" :new              create new window
+" :put! a           paste register a into new window
+nnoremap <silent> <leader>/ :redir @a<CR>:g//<CR>:redir END<CR>:tabnew<CR>:put! a<CR>
 
 " Clone Paragraph with cp ------------------------------------------------------
 " This will copy the paragraph your cursor is on then paste a copy of it just
@@ -728,13 +752,16 @@ nnoremap <leader>T :NERDTreeToggle<CR>
 nnoremap <leader>s :w<cr>
 inoremap <leader>s <C-c>:w<cr>
 
-" Be able to move lines up and down
-nnoremap <A-j> :m .+1<CR>==
-nnoremap <A-k> :m .-2<CR>==
-inoremap <A-j> <Esc>:m .+1<CR>==gi
-inoremap <A-k> <Esc>:m .-2<CR>==gi
-vnoremap <A-j> :m '>+1<CR>gv=gv
-vnoremap <A-k> :m '<-2<CR>gv=gv
+" Bubbling - Move lines up and down
+" Requires vim-impared mappings since I'm mapping to mappings
+" Bubble single lines
+execute "set <M-k>=\ed"
+execute "set <M-j>=\ed"
+nmap <M-k> [e
+nmap <M-j> ]e
+" Bubble multiple lines
+vmap <M-k> [egv
+vmap <M-j> ]egv
 
 " have gf open a new tab -------------------------------------------------------
 " [OVERRIDES DEFAULT BEHAVIOUR]
@@ -849,3 +876,31 @@ function! SetSpaces(arg)
 endfunction
 
 command! -nargs=1 SetSpaces :call SetSpaces(<f-args>)
+
+" Set tabstop, softtabstop and shiftwidth to the same value
+command! -nargs=* Stab call Stab()
+function! Stab()
+   let l:tabstop = 1 * input('set tabstop = softtabstop = shiftwidth = ')
+   if l:tabstop > 0
+      let &l:sts = l:tabstop
+      let &l:ts = l:tabstop
+      let &l:sw = l:tabstop
+   endif
+   call SummarizeTabs()
+endfunction
+
+function! SummarizeTabs()
+   try
+      echohl ModeMsg
+      echon 'tabstop='.&l:ts
+      echon ' shiftwidth='.&l:sw
+      echon ' softtabstop='.&l:sts
+      if &l:et
+         echon ' expandtab'
+      else
+         echon ' noexpandtab'
+      endif
+   finally
+      echohl None
+   endtry
+endfunction
