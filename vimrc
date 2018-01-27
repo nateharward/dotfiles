@@ -120,7 +120,9 @@ call plug#begin('~/.vim/plugged')
   Plug 'vim-perl/vim-perl', { 'for': 'perl', 'do': 'make clean carp dancer highlight-all-pragmas moose test-more try-tiny' }
 
   " Go development plugin for Vim
-  Plug 'fatih/vim-go'
+  if v:version > 740
+    Plug 'fatih/vim-go'
+  endif
 
   " OVM systemverilog plugin
   " NOTE works well, can fall back on this if hacked version below gives trouble
