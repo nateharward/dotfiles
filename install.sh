@@ -29,4 +29,10 @@ wget -nc https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/Meslo/
 fc-cache -rv
 xrdb ~/.Xresources
 
-# TODO local install https://github.com/dvorka/hstr.git
+# TODO Brew setup
+#
+#
+
+
+# Brew installations
+brew install hh ; # https://github.com/dvorka/hstr.git
