@@ -1,8 +1,15 @@
-BASE16_SHELL=$HOME/repos/dotfiles/base16-shell/
+DOTFILES=$HOME/repos/dotfiles
+
+BASE16_SHELL=$DOTFILES/base16-shell/
 [ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
 
 base16_flat
 set -o vi
+
+# Linuxbrew
+PATH="$DOTFILES/brew/bin:$PATH"
+export MANPATH="$(brew --prefix)/share/man:$MANPATH"
+export INFOPATH="$(brew --prefix)/share/info:$INFOPATH"
 
 # Path to the bash it configuration
 export BASH_IT="$HOME/repos/dotfiles/bash-it"
