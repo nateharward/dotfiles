@@ -16,8 +16,11 @@ echo "TODO Map .tmux folder to disk location"
 # bash
 echo ln -sv ${BASEDIR}/bashrc ~/.bashrc.${USER}
 ln -sv ${BASEDIR}/bashrc ~/.bashrc.${USER}
-
 echo "Add source ~/.bashrc.${USER} to your .bashrc file"
+
+# tig
+echo ln -sv ${BASEDIR}/tigrc ~/.tigrc
+ln -sv ${BASEDIR}/tigrc ~/.tigrc
 
 # make fonts folder if it doesn't exist already
 LSFONTSDIR=$HOME/.local/share/fonts
