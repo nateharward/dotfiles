@@ -5,6 +5,20 @@ BASE16_SHELL=$DOTFILES/base16-shell/
 
 base16_flat
 set -o vi
+bind '"jj":vi-movement-mode'
+
+# WSL / Windows Bash specific stuffs
+if grep -qE "(Microsoft|WSL)" /proc/version &> /dev/null ; then
+  export DISPLAY=:0
+  xrdb $HOME/.Xresources
+#else
+#  echo "Anything else"
+fi
+
+# History
+export HISTSIZE=9000
+export HISTCONTROL=ignoredups:erasedups #don't write duplicate entries.
+shopt -s histappend # append to the history file, instead of the default which is to overwrite \
 
 # Linuxbrew
 PATH="$DOTFILES/brew/bin:$PATH"
@@ -16,7 +30,8 @@ export BASH_IT="$HOME/repos/dotfiles/bash-it"
 
 # Lock and Load a custom theme file
 # location /.bash_it/themes/
-export BASH_IT_THEME='bobby'
+#export BASH_IT_THEME='bobby'
+export BASH_IT_THEME='atomic'
 
 # (Advanced): Change this to the name of your remote repo if you
 # cloned bash-it with a remote other than origin such as `bash-it`.
