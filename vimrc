@@ -1,5 +1,5 @@
 "
-" Nate Harward's Vim RC
+"  Nate Harward's Vim RC
 "
 
 " This must be first, because it changes other options as side effect
@@ -745,7 +745,7 @@ nnoremap <leader>w :ToggleWorkspace<CR>
 
 " Open Nerd Tree
 " Dependant on plugin scrooloose/nerdtree
-nnoremap <leader>T :NERDTreeToggle<CR>
+nnoremap <leader>n :NERDTreeToggle<CR>
 
 " Save File with Leader + s ----------------------------------------------------
 " If you're like me and you like to constantly save files, this one is nice.
@@ -781,7 +781,7 @@ nnoremap <C-W><C-F> <C-W>vgf
 if has('win32')
   nmap <leader>f :let @*=substitute(expand("%:p"), "/", "\\", "g")<CR>
 else
-  nmap <leader>f :let @*=expand("%:p")<CR>
+  nmap <leader>f :let @*=expand("%:p")<CR>:let @+=expand("%:p")<CR>
 endif
 
 " copy all - everything in the file
