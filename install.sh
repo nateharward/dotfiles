@@ -27,15 +27,15 @@ echo ln -sv ${BASEDIR}/tigrc ~/.tigrc
 ln -sv ${BASEDIR}/tigrc ~/.tigrc
 
 # make fonts folder if it doesn't exist already
-LSFONTSDIR=$HOME/.local/share/fonts
+LSFONTSDIR="$HOME"/.local/share/fonts
 mkdir -p $LSFONTSDIR 
 
-# if WSL, install the folloing packages
+# if WSL, install the following packages
 # sudo apt-get install x11-xserver-utils
 
 # get preferred fonts
-wget -nc https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/Meslo/S-DZ/complete/Meslo%20LG%20S%20DZ%20Regular%20Nerd%20Font%20Complete.otf $LSFONTSDIR 
-wget -nc https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/Meslo/S-DZ/complete/Meslo%20LG%20S%20DZ%20Regular%20Nerd%20Font%20Complete%20Mono.otf $LSFONTSDIR
+wget -nc -O $LSFONTSDIR https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/DejaVuSansMono/Regular/complete/DejaVu%20Sans%20Mono%20Nerd%20Font%20Complete%20Mono.ttf 
+wget -nc -O $LSFONTSDIR https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/DejaVuSansMono/Regular/complete/DejaVu%20Sans%20Mono%20Nerd%20Font%20Complete.ttf
 
 fc-cache -rv
 xrdb ~/.Xresources
@@ -46,4 +46,4 @@ xrdb ~/.Xresources
 
 
 # Brew installations
-brew install hh ; # https://github.com/dvorka/hstr.git
+#brew install hh ; # https://github.com/dvorka/hstr.git
