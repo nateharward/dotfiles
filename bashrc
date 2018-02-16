@@ -21,9 +21,13 @@ export HISTCONTROL=ignoredups:erasedups #don't write duplicate entries.
 shopt -s histappend # append to the history file, instead of the default which is to overwrite \
 
 # Linuxbrew
-PATH="$DOTFILES/brew/bin:$PATH"
-export MANPATH="$(brew --prefix)/share/man:$MANPATH"
-export INFOPATH="$(brew --prefix)/share/info:$INFOPATH"
+if [[ $HOSTNAME =~ ^.*\.intel.com$ ]]; then # on work machine
+   export ONWORKMACHINE=1
+else
+   PATH="$DOTFILES/brew/bin:$PATH"
+   export MANPATH="$(brew --prefix)/share/man:$MANPATH"
+   export INFOPATH="$(brew --prefix)/share/info:$INFOPATH"
+fi
 
 # Path to the bash it configuration
 export BASH_IT="$HOME/repos/dotfiles/bash-it"

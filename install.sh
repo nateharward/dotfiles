@@ -27,19 +27,18 @@ echo ln -sv ${BASEDIR}/tigrc ~/.tigrc
 ln -sv ${BASEDIR}/tigrc ~/.tigrc
 
 # make fonts folder if it doesn't exist already
-LSFONTSDIR="$HOME"/.local/share/fonts
+LSFONTSDIR=${HOME}/.local/share/fonts
 mkdir -p $LSFONTSDIR 
 
 # if WSL, install the following packages
 # sudo apt-get install x11-xserver-utils
 
 # get preferred fonts
-wget -nc -O $LSFONTSDIR https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/DejaVuSansMono/Regular/complete/DejaVu%20Sans%20Mono%20Nerd%20Font%20Complete%20Mono.ttf 
-wget -nc -O $LSFONTSDIR https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/DejaVuSansMono/Regular/complete/DejaVu%20Sans%20Mono%20Nerd%20Font%20Complete.ttf
+wget -nc --no-check-certificate -P ${LSFONTSDIR} https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/DejaVuSansMono/Regular/complete/DejaVu%20Sans%20Mono%20Nerd%20Font%20Complete%20Mono.ttf 
+wget -nc --no-check-certificate -P ${LSFONTSDIR} https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/DejaVuSansMono/Regular/complete/DejaVu%20Sans%20Mono%20Nerd%20Font%20Complete.ttf
 
 fc-cache -rv
-xrdb ~/.Xresources
-
+xrdb -merge ~/.Xresources
 # TODO Brew setup
 #
 #
