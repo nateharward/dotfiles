@@ -1,5 +1,5 @@
 "
-" Nate Harward's Vim RC
+"  Nate Harward's Vim RC
 "
 
 " This must be first, because it changes other options as side effect
@@ -120,7 +120,9 @@ call plug#begin('~/.vim/plugged')
   Plug 'vim-perl/vim-perl', { 'for': 'perl', 'do': 'make clean carp dancer highlight-all-pragmas moose test-more try-tiny' }
 
   " Go development plugin for Vim
-  Plug 'fatih/vim-go'
+  if v:version > 740
+    Plug 'fatih/vim-go'
+  endif
 
   " OVM systemverilog plugin
   " NOTE works well, can fall back on this if hacked version below gives trouble
@@ -748,7 +750,7 @@ nnoremap <leader>w :ToggleWorkspace<CR>
 
 " Open Nerd Tree
 " Dependant on plugin scrooloose/nerdtree
-nnoremap <leader>T :NERDTreeToggle<CR>
+nnoremap <leader>n :NERDTreeToggle<CR>
 
 " Save File with Leader + s ----------------------------------------------------
 " If you're like me and you like to constantly save files, this one is nice.
@@ -784,7 +786,7 @@ nnoremap <C-W><C-F> <C-W>vgf
 if has('win32')
   nmap <leader>f :let @*=substitute(expand("%:p"), "/", "\\", "g")<CR>
 else
-  nmap <leader>f :let @*=expand("%:p")<CR>
+  nmap <leader>f :let @*=expand("%:p")<CR>:let @+=expand("%:p")<CR>
 endif
 
 " copy all - everything in the file

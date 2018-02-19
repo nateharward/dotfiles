@@ -13,3 +13,27 @@ contains:
 * VIM .vimrc
 * TMUX .tmux.conf
 * BASH .bashrc.$USER (sourced by .bashrc)
+
+
+
+#### Proxy setup notes
+
+.curlrc add 
+
+    proxy =http://<path>:<port>
+.wgetrc add 
+    http_proxy=http://<path>:<port>"
+    https_proxy=https://<path>:<port>"
+http git, add to .gitconfig
+    [http]
+        proxy = http://<path>:<port>
+    [https]
+        proxy = https://<path>:<port>
+git:// on ssh
+    Host github.com
+        ProxyCommand nc -X 5 -x <path>:<port> %h %p
+apt install  /etc/apt/apt.conf   
+    Acquire::http::Proxy "http://<path>:<port>";
+    Acquire::ftp::Proxy "TODO";
+
+
