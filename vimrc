@@ -269,6 +269,7 @@ call plug#begin('~/.vim/plugged')
 """ Appearance, asthetics
   " Base16 for Vim
   Plug 'chriskempson/base16-vim'
+  let g:base16_shell_path='$DOTFILES/base16-shell/scripts/'
 
   " lean & mean status/tabline for vim that's light as air
   Plug 'vim-airline/vim-airline'
@@ -469,8 +470,12 @@ let g:airline_powerline_fonts = 1
 let g:airline_theme='base16_flat'
 
 " use ag instead of ack for :Ack command
+if executable('ag')
+   let g:ackprg = 'ag --vimgrep' " will report every match on the line
+endif
+
+" unnless we have pt, use that instead of ag or ack 
 if executable('pt')
-"  let g:ackprg = 'pt --vimgrep' " will report every match on the line
    let g:ackprg = 'pt --nogroup --nocolor --column'
 endif
 

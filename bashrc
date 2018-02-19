@@ -1,4 +1,4 @@
-DOTFILES=$HOME/repos/dotfiles
+export DOTFILES=$HOME/repos/dotfiles
 
 BASE16_SHELL=$DOTFILES/base16-shell/
 [ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
@@ -61,5 +61,4 @@ export SCM_CHECK=true
 
 # Load Bash It
 source "$BASH_IT"/bash_it.sh
-
 
