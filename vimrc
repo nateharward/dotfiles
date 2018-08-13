@@ -20,11 +20,6 @@ set ttimeoutlen=100
 "set listchars=tab:▸\ ,eol:¶ " Eclipse DVT
 "       testing tab     char
 
-" Use <C-L> to clear the highlighting of :set hlsearch.
-if maparg('<C-L>', 'n') ==# ''
-  nnoremap <silent> <C-L> :nohlsearch<CR><C-L>
-endif
-
 set laststatus=2 " Always show the status line
 set ruler " Show where I am in the cmd area
 set showcmd " count highlighted
@@ -112,7 +107,10 @@ call plug#begin('~/.vim/plugged')
   Plug 'airblade/vim-gitgutter'
 """
 
-""" Languages plugins
+""" Languages plugins and linters
+  " Asynchronous Lint Engine
+  Plug 'w0rp/ale'
+
   " Syntax highlighting for SystemRDL files
   Plug 'vim-scripts/systemrdl.vim'
 
@@ -134,6 +132,9 @@ call plug#begin('~/.vim/plugged')
 
   " A modern vim plugin for editing LaTeX files.
   Plug 'lervag/vimtex'
+
+  " Fast and Highly Extensible Vim script Language Lint implemented by Python
+  Plug 'Kuniwak/vint'
 
   " Log file highlighting
   " TODO merge into vim-intel repo
@@ -270,8 +271,18 @@ call plug#begin('~/.vim/plugged')
 
 """ Appearance, asthetics
   " Base16 for Vim
-  Plug 'chriskempson/base16-vim'
-  let g:base16_shell_path='$DOTFILES/base16-shell/scripts/'
+   if !empty(glob('~/repos/base16-builder-go/templates/vim/'))
+     Plug '~/repos/base16-builder-go/templates/vim/'
+   else
+     Plug 'chriskempson/base16-vim'
+   endif
+   if !empty(glob('~/repos/base16-builder-go/templates/shell/scripts/'))
+     let g:base16_shell_path='~/repos/base16-builder-go/templates/shell/scripts'
+   elseif !empty(glob('$DOTFILES/base16-shell/scripts/'))
+     let g:base16_shell_path='$DOTFILES/base16-shell/scripts/'
+   else
+      echo 'No base16 shell scripts found'
+   endif
 
   " lean & mean status/tabline for vim that's light as air
   Plug 'vim-airline/vim-airline'
@@ -626,6 +637,11 @@ noremap <silent><F12> :call quickmenu#toggle(0)<cr>
 " Use jj for escape ----------------------------------------------------------
 :imap jj <Esc>
 
+" Use <C-L> to clear the highlighting of :set hlsearch.
+if maparg('<C-L>', 'n') ==# ''
+  nnoremap <silent> <C-L> :nohlsearch<CR><C-L>
+endif
+
 " Make * or # work with visually selected text in addition to its normal function
 " Search for selected text, forwards or backwards.
 vnoremap <silent> * :<C-U>
@@ -786,7 +802,7 @@ nnoremap <C-W><C-F> <C-W>vgf
 if has('win32')
   nmap <leader>f :let @*=substitute(expand("%:p"), "/", "\\", "g")<CR>
 else
-  nmap <leader>f :let @*=expand("%:p")<CR>:let @+=expand("%:p")<CR>
+  nmap <leader>f :let @f=expand("%:p")<CR>
 endif
 
 " copy all - everything in the file
