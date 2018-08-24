@@ -1,7 +1,7 @@
 # exit if non-interactive
 test "${-#*i}" != "$-" || return 0
 
-DOTFILES=$HOME/repos/dotfiles
+export DOTFILES=$HOME/repos/dotfiles
 
 BASE16_SHELL=$DOTFILES/base16-shell/
 [ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
@@ -55,5 +55,3 @@ fi
 
 # Load machine specific files
 source $HOME/.bashrc.work
-
-

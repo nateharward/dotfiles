@@ -1,0 +1,28 @@
+" config for SC-IM
+
+" 'autocalc'
+"     Set it to recalculate values automatically, or to '0' to do it manually
+"     upon execution of a '@' command.
+set autocalc
+
+" make an initial digit start a numeric value
+" 'numeric'
+"     Set it to '1' to make an initial digit start a numeric value.
+"     Set it to '0', to make a digit act as a command multiplier.
+set numeric
+
+" 'numeric_zero' [default off]
+" 'numeric_decimal' [default off]
+"     When these are set, the zero digit or decimal point will correspondingly
+"     initiate numeric entry, but only when 'numeric' is also set.
+se numeric_decimal=0
+
+" 'overlap' [default off]
+"     If cell content exceedes column width it gets cut off to fit the column
+"     width.  If overlap is set, the content overflows into the next column
+set overlap
+
+" 'xlsx_readformulas' [default off]
+"     If 'xlsx_readformulas' is set, SC-IM tries to import formulas,
+"     rather than the final values of a cell.
+set xlsx_readformulas

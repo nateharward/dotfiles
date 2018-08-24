@@ -20,11 +20,6 @@ set ttimeoutlen=100
 "set listchars=tab:▸\ ,eol:¶ " Eclipse DVT
 "       testing tab     char
 
-" Use <C-L> to clear the highlighting of :set hlsearch.
-if maparg('<C-L>', 'n') ==# ''
-   nnoremap <silent> <C-L> :nohlsearch<CR><C-L>
-endif
-
 set laststatus=2 " Always show the status line
 set ruler " Show where I am in the cmd area
 set showcmd " count highlighted
@@ -112,6 +107,10 @@ Plug 'gregsexton/gitv', {'on': ['Gitv']}
 Plug 'airblade/vim-gitgutter'
 """
 
+""" Languages plugins and linters
+" Asynchronous Lint Engine
+Plug 'w0rp/ale'
+
 """ Languages plugins
 " Syntax highlighting for SystemRDL files
 Plug 'vim-scripts/systemrdl.vim'
@@ -137,6 +136,9 @@ endif
 " OVM and UVM hacked together systemverilog plugin by nateharward
 " TODO put on github
 Plug '~/repos/verilog_systemverilog.vim'
+
+" Fast and Highly Extensible Vim script Language Lint implemented by Python
+Plug 'Kuniwak/vint'
 
 " A modern vim plugin for editing LaTeX files.
 Plug 'lervag/vimtex'
@@ -318,8 +320,19 @@ Plug 'Shougo/vimproc.vim', {'do' : 'make'}
 """
 
 """ Appearance, asthetics
-" Base16 for Vim
-Plug 'chriskempson/base16-vim'
+  " Base16 for Vim
+   if !empty(glob('~/repos/base16-builder-go/templates/vim/'))
+     Plug '~/repos/base16-builder-go/templates/vim/'
+   else
+     Plug 'chriskempson/base16-vim'
+   endif
+   if !empty(glob('~/repos/base16-builder-go/templates/shell/scripts/'))
+     let g:base16_shell_path='~/repos/base16-builder-go/templates/shell/scripts'
+   elseif !empty(glob('$DOTFILES/base16-shell/scripts/'))
+     let g:base16_shell_path='$DOTFILES/base16-shell/scripts/'
+   else
+      echo 'No base16 shell scripts found'
+   endif
 
 " lean & mean status/tabline for vim that's light as air
 Plug 'vim-airline/vim-airline'
@@ -600,9 +613,13 @@ if executable('pt')
    let g:ctrlp_user_command = 'pt %s -l --nocolor -g ""'
 endif
 
-" use pt or ag instead of ack for :Ack command
+" use ag instead of ack for :Ack command
+if executable('ag')
+   let g:ackprg = 'ag --vimgrep' " will report every match on the line
+endif
+
+" unnless we have pt, use that instead of ag or ack 
 if executable('pt')
-   "  let g:ackprg = 'pt --vimgrep' " will report every match on the line
    let g:ackprg = 'pt --nogroup --nocolor --column'
 endif
 
@@ -737,6 +754,11 @@ noremap <silent><F12> :call quickmenu#toggle(0)<cr>
 
 " Use jj for escape ----------------------------------------------------------
 :imap jj <Esc>
+
+" Use <C-L> to clear the highlighting of :set hlsearch.
+if maparg('<C-L>', 'n') ==# ''
+  nnoremap <silent> <C-L> :nohlsearch<CR><C-L>
+endif
 
 " Make * or # work with visually selected text in addition to its normal function
 " Search for selected text, forwards or backwards.

@@ -1,12 +1,22 @@
+! Nate Harwards Xterm setup
+! TODO find a good way to have a per-machine font size setting
+!   2160p screens vs 1080p
+!   TODO scrollbars and visual bells
+
 xterm*ttyModes: intr ^c erase ^h weras ^w kill ^u
-xterm*utf8: 1
+xterm*utf8: true
 xterm*locale: true
 xterm*utf8Title: true
+*XTerm.vt100.saveLines: 4096 
+*XTerm.vt100.metaSendsEscape: true
+
 xterm*renderFont: true
 xterm*preeditType: Root
 xterm*xftAntialias: true
 xterm*faceName: DejaVuSansMono Nerd Font Mono
 xterm*faceNameDoublesize: DejaVuSansMono Nerd Font
+!xterm*faceSize: 10 ! on personal laptop
+!xterm*faceSize: 20 ! on 2160p screens
 xterm*faceSize: 11 
 xterm*scrollBar: false
 
@@ -25,11 +35,7 @@ XTerm.vt100.geometry: 256x80
 !xterm*faceNameDoublesize: SauceCodePro Nerd Font
 !xterm*faceName: MesloLGSDZ Nerd Font Mono:pixelsize=10
 !xterm*faceNameDoublesize: MesloLGSDZ Nerd Font Mono:pixelsize=10
-!xterm*faceSize: 10 
 !xterm*faceName: Bitstream Vera Sans Mono:pixelsize=15
 !xterm*faceNameDoublesize: Bitstream Vera Sans Mono:pixelsize=13
 !xterm*faceName: Meslo LG S DZ for Powerline:pixelsize=15
-!xterm*faceName: asdfMeslo LG S DZ for Powerline:pixelsize=15
 !xterm*faceNameDoublesize: Meslo LG S DZ for Powerline:pixelsize=13
-!xterm*faceNameDoublesize: asdfMeslo LG S DZ for Powerline:pixelsize=13
-!xterm*faceName: *Meslo* 
