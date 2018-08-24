@@ -1,3 +1,4 @@
+xterm*ttyModes: intr ^c erase ^h weras ^w kill ^u
 xterm*utf8: 1
 xterm*locale: true
 xterm*utf8Title: true
@@ -6,13 +7,25 @@ xterm*preeditType: Root
 xterm*xftAntialias: true
 xterm*faceName: DejaVuSansMono Nerd Font Mono
 xterm*faceNameDoublesize: DejaVuSansMono Nerd Font
+xterm*faceSize: 11 
+xterm*scrollBar: false
+
+! Copy and paste with clipboard
+xterm*translations: #override \
+	Ctrl Shift <KeyPress> C: copy-selection(CLIPBOARD) \n\
+	Ctrl Shift <KeyPress> V: insert-selection(CLIPBOARD)
+
+XTerm*trimSelection: true
+xterm*visualBell: off
+XTerm.vt100.geometry: 256x80
+
 !xterm*faceName: MesloLGSDZ Nerd Font Mono
 !xterm*faceName: ShureTechMono Nerd Font Mono
 !xterm*faceName: SauceCodePro Nerd Font Mono
 !xterm*faceNameDoublesize: SauceCodePro Nerd Font
 !xterm*faceName: MesloLGSDZ Nerd Font Mono:pixelsize=10
 !xterm*faceNameDoublesize: MesloLGSDZ Nerd Font Mono:pixelsize=10
-xterm*faceSize: 10 
+!xterm*faceSize: 10 
 !xterm*faceName: Bitstream Vera Sans Mono:pixelsize=15
 !xterm*faceNameDoublesize: Bitstream Vera Sans Mono:pixelsize=13
 !xterm*faceName: Meslo LG S DZ for Powerline:pixelsize=15

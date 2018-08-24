@@ -1,7 +1,16 @@
+# exit if non-interactive
+test "${-#*i}" != "$-" || return 0
+
 DOTFILES=$HOME/repos/dotfiles
 
 BASE16_SHELL=$DOTFILES/base16-shell/
 [ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
+
+if [ -e /usr/share/terminfo/x/xterm-256color ]; then
+        export TERM='xterm-256color'
+else
+        export TERM='xterm-color'
+fi
 
 base16_flat
 set -o vi
@@ -29,58 +38,22 @@ else
    export INFOPATH="$(brew --prefix)/share/info:$INFOPATH"
 fi
 
-# Path to the bash it configuration
-export BASH_IT="$HOME/repos/dotfiles/bash-it"
+# Load Bash It Settings and Bashit itself
+source "$HOME"/.bashrc.bashit
 
-# Lock and Load a custom theme file
-# location /.bash_it/themes/
-#export BASH_IT_THEME='bobby'
-export BASH_IT_THEME='atomic'
+# Partial fix for bashit slowness
+# https://github.com/Bash-it/bash-it/issues/914
+PS1="\n$(battery_char) ${yellow} ${purple}\h ${reset_color}in ${green}\w\n${bold_cyan}$(scm_char)${green}→${reset_color} "
 
-# (Advanced): Change this to the name of your remote repo if you
-# cloned bash-it with a remote other than origin such as `bash-it`.
-# export BASH_IT_REMOTE='bash-it'
+if [ -r $HOME/.aliases-bash-personal ]; then
+  source $HOME/.aliases-bash-personal
+fi
 
-# Your place for hosting Git repos. I use this for private repos.
-export GIT_HOSTING='git@git.domain.com'
-
-# Don't check mail when opening terminal.
-unset MAILCHECK
-
-# Change this to your console based IRC client of choice.
-export IRC_CLIENT='irssi'
-
-# Set this to the command you use for todo.txt-cli
-export TODO="t"
-
-# Set this to false to turn off version control status checking within the prompt for all themes
-export SCM_CHECK=true
-
-# Set Xterm/screen/Tmux title with only a short hostname.
-# Uncomment this (or set SHORT_HOSTNAME to something else),
-# Will otherwise fall back on $HOSTNAME.
-#export SHORT_HOSTNAME=$(hostname -s)
-
-# Set Xterm/screen/Tmux title with only a short username.
-# Uncomment this (or set SHORT_USER to something else),
-# Will otherwise fall back on $USER.
-#export SHORT_USER=${USER:0:8}
-
-# Set Xterm/screen/Tmux title with shortened command and directory.
-# Uncomment this to set.
-#export SHORT_TERM_LINE=true
-
-# Set vcprompt executable path for scm advance info in prompt (demula theme)
-# https://github.com/djl/vcprompt
-#export VCPROMPT_EXECUTABLE=~/.vcprompt/bin/vcprompt
-
-# (Advanced): Uncomment this to make Bash-it reload itself automatically
-# after enabling or disabling aliases, plugins, and completions.
-# export BASH_IT_AUTOMATIC_RELOAD_AFTER_CONFIG_CHANGE=1
-
-# Load Bash It
-source "$BASH_IT"/bash_it.sh
+if [ -r $HOME/.aliases-bash-work ]; then
+  source $HOME/.aliases-bash-work
+fi
 
 # Load machine specific files
-source "$HOME"/.bashrc.work
+source $HOME/.bashrc.work
+
 
