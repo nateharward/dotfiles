@@ -7,8 +7,8 @@ xterm*ttyModes: intr ^c erase ^h weras ^w kill ^u
 xterm*utf8: true
 xterm*locale: true
 xterm*utf8Title: true
-*XTerm.vt100.saveLines: 4096 
-*XTerm.vt100.metaSendsEscape: true
+xterm*vt100.saveLines: 4096 
+xterm*vt100.metaSendsEscape: true
 
 xterm*renderFont: true
 xterm*preeditType: Root
@@ -25,9 +25,9 @@ xterm*translations: #override \
 	Ctrl Shift <KeyPress> C: copy-selection(CLIPBOARD) \n\
 	Ctrl Shift <KeyPress> V: insert-selection(CLIPBOARD)
 
-XTerm*trimSelection: true
+xterm*trimSelection: true
 xterm*visualBell: off
-XTerm.vt100.geometry: 256x80
+xterm*vt100.geometry: 256x80
 
 !xterm*faceName: MesloLGSDZ Nerd Font Mono
 !xterm*faceName: ShureTechMono Nerd Font Mono

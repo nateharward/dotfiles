@@ -57,10 +57,16 @@ endif
 set autoread
 set fileformats+=mac
 
-if !empty(&viminfo)
-   set viminfo^=!
-endif
-set sessionoptions-=options
+" If it gets laggy when ssh'd in, set this option
+" same as -X option. Also his will stop the "No protocol specified" error when running a GUI enabled instance of vim under root.
+" set clipboard=exclude:.*
+
+" if !empty(&viminfo)
+"    set viminfo^=!
+" endif
+" set sessionoptions-=options
+
+if v:version > 702
 
 " Allow color schemes to do bright colors without forcing bold.
 if &t_Co == 8 && $TERM !~# '^linux\|^Eterm'
@@ -104,7 +110,32 @@ Plug 'tpope/vim-fugitive'
 Plug 'gregsexton/gitv', {'on': ['Gitv']}
 
 " A Vim plugin which shows a git diff in the gutter (sign column) and stages/undoes hunks.
-Plug 'airblade/vim-gitgutter'
+if v:version >= 740
+   Plug 'airblade/vim-gitgutter'
+endif
+
+" A git commit browser in Vim
+" - `:GV` to open commit browser
+" - `:GV!` will only list commits that affected the current file
+" - `]]` and `[[` to move between commits
+Plug 'junegunn/gv.vim'
+
+" Ease your git workflow within Vim
+" - `:Magit`  Open magit buffer with [:Magit](#magitshow_magit) command.
+" - `<C-n>`   Jump to next hunk with `<C-n>`, or move the cursor as you like. The cursor is on a hunk.
+" - `S`       While the cursor is on an unstaged hunk, press `S` in Normal mode: the hunk is now staged, and appears in "Staged changes" section (you can also unstage a hunk from "Staged section" with `S`).
+" - `CC`      Once you have stage all the required changes, press `CC`.
+Plug 'jreybert/vimagit'
+
+" Git branch management for Vim
+Plug 'sodapopcan/vim-twiggy'
+
+" TODO look at this async git plugin
+" Plug 'lambdalisue/gina.vim'
+
+" TODO look at this plugin that helps with merging
+" Plug 'sjl/threesome.vim'
+
 """
 
 """ Languages plugins and linters
@@ -121,8 +152,17 @@ Plug 'octol/vim-cpp-enhanced-highlight'
 " Support for Perl 5 and Perl 6 in Vim
 Plug 'vim-perl/vim-perl', { 'for': 'perl', 'do': 'make clean carp dancer highlight-all-pragmas moose test-more try-tiny' }
 
+" Reason language
+if v:version > 800
+   Plug 'reasonml-editor/vim-reason-plus'
+else
+   Plug 'reasonml-editor/vim-reason-legacy'
+endif
+
 " Edit Bash scripts in Vim/gVim. Insert code snippets, run, check, and debug the code and look up help
-Plug 'WolfgangMehner/bash-support'
+if v:version >= 740 
+   Plug 'WolfgangMehner/bash-support'
+endif
 
 " Go development plugin for Vim
 if v:version > 740
@@ -135,7 +175,9 @@ endif
 
 " OVM and UVM hacked together systemverilog plugin by nateharward
 " TODO put on github
-Plug '~/repos/verilog_systemverilog.vim'
+" Plug '~/repos/verilog_systemverilog.vim'
+Plug 'vhda/verilog_systemverilog.vim'
+let g:verilog_efm_level = "lint"
 
 " Fast and Highly Extensible Vim script Language Lint implemented by Python
 Plug 'Kuniwak/vint'
@@ -171,11 +213,17 @@ nnoremap <silent> <leader>tb :TagbarToggle<CR>
 " Vim plugin for the Perl module / CLI script 'ack'
 Plug 'mileszs/ack.vim'
 
+" platinum searcher
+Plug 'nazo/pt.vim'
+
 " Fuzzy file, buffer, mru, tag, etc finder.
 Plug 'ctrlpvim/ctrlp.vim'
 
 " 🐉  Dark powered asynchronous unite all interfaces for Neovim/Vim8
-" Plug 'Shougo/denite.nvim'
+Plug 'Shougo/denite.nvim'
+
+" dispatch.vim: Asynchronous build and test dispatcher 
+Plug 'tpope/vim-dispatch'
 
 " A nice customizable popup menu for vim
 Plug 'skywind3000/quickmenu.vim'
@@ -254,6 +302,14 @@ Plug 'tmux-plugins/vim-tmux'
 " unimpaired.vim: pairs of handy bracket mappings
 Plug 'tpope/vim-unimpaired'
 
+" Vim plugin that provides additional text objects
+" CHEATSHEET https://raw.githubusercontent.com/wellle/targets.vim/master/cheatsheet.md
+Plug 'wellle/targets.vim'
+
+" copy rtf for pasting into emails with color syntax etc
+" FIXME look at closely and make it work for linux
+" Plug 'zerowidth/vim-copy-as-rtf'
+
 " Vim plugin that allows you to visually select increasingly larger regions of text using the same key combination.
 Plug 'terryma/vim-expand-region'
 
@@ -270,14 +326,21 @@ Plug 'terryma/vim-expand-region'
 "let g:EnhCommentifyCallbackExists = 'Yes'
 
 " Comment functions so powerful—no comment necessary.
-Plug 'scrooloose/nerdcommenter'
-let g:NERDSpaceDelims = 1
+" Plug 'scrooloose/nerdcommenter'
+" let g:NERDSpaceDelims = 1
 "Uncomments the selected line(s).
 "  [count]<leader>cu
 "Comment out the current line or text selected in visual mode.
 "  [count]<leader>cc
 "Toggles the comment state of the selected line(s). If the topmost selected line is commented, all selected lines are uncommented and vice versa.
 "  [count]<leader>c<space>
+
+" commentary.vim: comment stuff out 
+" Use gcc to comment out a line (takes a count), 
+" gc to comment out the target of a motion (for example, gcap to comment out a paragraph), 
+" gc in visual mode to comment out the selection, and 
+" gc in operator pending mode to target a comment.
+Plug 'tpope/vim-commentary'
 
 " Vim script for text filtering and alignment
 Plug 'godlygeek/tabular'
@@ -287,6 +350,10 @@ Plug 'easymotion/vim-easymotion'
 let g:EasyMotion_smartcase = 1
 map <Leader>j <Plug>(easymotion-j)
 map <Leader>k <Plug>(easymotion-k)
+map <Space>l <Plug>(easymotion-lineforward)
+map <Space>j <Plug>(easymotion-j)
+map <Space>k <Plug>(easymotion-k)
+map <Space>h <Plug>(easymotion-linebackward)
 " nmap s <Plug>(easymotion-overwin-f
 
 """
@@ -317,15 +384,24 @@ Plug 'tpope/vim-repeat'
 
 " Interactive command execution in Vim.
 Plug 'Shougo/vimproc.vim', {'do' : 'make'}
+
+" Gray out the colors for unused areas of code (ifdef etc)
+Plug 'mphe/grayout.vim'
+
+" Text outlining and task management for Vim based on Emacs' Org-Mode
+Plug 'jceb/vim-orgmode'
+
 """
 
 """ Appearance, asthetics
-  " Base16 for Vim
-   if !empty(glob('~/repos/base16-builder-go/templates/vim/'))
-     Plug '~/repos/base16-builder-go/templates/vim/'
-   else
-     Plug 'chriskempson/base16-vim'
-   endif
+" Base16 for Vim
+if !empty(glob('~/repos/base16-builder-go/templates/vim/'))
+  Plug '~/repos/base16-builder-go/templates/vim/'
+else
+  Plug 'chriskempson/base16-vim'
+endif
+
+if !has('gui_running')
    if !empty(glob('~/repos/base16-builder-go/templates/shell/scripts/'))
      let g:base16_shell_path='~/repos/base16-builder-go/templates/shell/scripts'
    elseif !empty(glob('$DOTFILES/base16-shell/scripts/'))
@@ -333,6 +409,7 @@ Plug 'Shougo/vimproc.vim', {'do' : 'make'}
    else
       echo 'No base16 shell scripts found'
    endif
+endif
 
 " lean & mean status/tabline for vim that's light as air
 Plug 'vim-airline/vim-airline'
@@ -347,8 +424,9 @@ let g:airline_theme='base16_flat'
 Plug 'edkolev/tmuxline.vim'
 
 """ Work specific plugins - to keep specifics info out of my public dotfiles
-
 Plug '~/repos/vim-intel'
+Plug '~/repos/vim-hdk/'
+
 
 """ Run after everything else
 
@@ -419,12 +497,32 @@ set smartcase             " …unless I use an uppercase character
 syntax sync minlines=256  " Makes big files slow
 set synmaxcol=2048        " Also long lines are slow
 set autoindent            " try your darndest to keep my indentation
-set smartindent           " Be smarter about indenting dummy
+" set smartindent           " Be smarter about indenting dummy
 set formatoptions=cotqr  " I like smart comments
 
+if !isdirectory($HOME.'/.vim/files') && exists('*mkdir')
+  call mkdir($HOME.'/.vim/files')
+endif
+
+" backup files
 set nobackup
 set nowritebackup
+" set backup
+" set backupdir   =$HOME/.vim/files/backup/
+" set backupext   =-vimbackup
+" set backupskip  =
+
+" swap files
 set noswapfile
+" set directory   =$HOME/.vim/files/swap//
+" set updatecount =100
+
+" undo files
+set undofile
+set undodir  =$HOME/.vim/files/undo/
+
+" viminfo files
+set viminfo     ='100,n$HOME/.vim/files/info/viminfo  
 
 " force 256
 "if has('unix')
@@ -502,7 +600,10 @@ else
    "
    " " Set this to the name of your terminal that supports mouse codes.
    " " Must be one of: xterm, xterm2, netterm, dec, jsbterm, pterm
-   set ttymouse=xterm2
+   " set ttymouse=xterm2 : xterm < 277 (ec default is 238)
+   if v:version >= 740
+      set ttymouse=sgr " allows for selecting columns past 223
+   endif
 
 endif
 
@@ -581,9 +682,9 @@ let g:tagbar_type_systemverilog = {
      \}
 
 " tweaking gitgitter to improve performance
-"let g:gitgutter_enabled = 0 " Disables gitgutter
-let g:gitgutter_realtime = 0 "
-let g:gitgutter_eager = 0
+" let g:gitgutter_enabled = 0 " Disables gitgutter
+" let g:gitgutter_realtime = 0 "
+" let g:gitgutter_eager = 0
 
 " thaerkh/vim-workspace
 " By default, all trailing spaces are trimmed before a buffer is autosaved. If
@@ -598,13 +699,6 @@ else
    let g:workspace_session_name = g:tmux_window_name . '-session.vim'
 endif
 
-" CTRLP
-" manage ctrlp cache
-if empty($MODEL_ROOT)
-   let g:ctrlp_cache_dir = '/tmp/naharwar/.cache/ctrlp'
-else
-   let g:ctrlp_cache_dir = $MODEL_ROOT . '/.cache/ctrlp'
-endif
 " Replace grep with pt
 if executable('pt')
    " Use pt over grep
@@ -689,6 +783,7 @@ augroup mynotes
    autocmd BufRead,BufNewFile todo set filetype=markdown
    autocmd BufRead,BufNewFile notes let g:auto_save = 1
    autocmd BufRead,BufNewFile notes set filetype=markdown
+   autocmd BufRead,BufNewFile notes.md let g:auto_save = 1
    "autocmd FileType notes set g:auto_save
    "autocmd FileType todo set g:auto_save
 augroup END
@@ -696,19 +791,22 @@ augroup END
 "
 " Filetypes
 "
-autocmd BufRead,BufNewFile *.rdl set filetype=systemrdl
-autocmd BufRead,BufNewFile *.tc set filetype=perl
-autocmd BufRead,BufNewFile *.hdl set filetype=perl
-autocmd BufRead,BufNewFile *.udf set filetype=perl
-" autocmd BufRead,BufNewFile *.vs set filetype=systemverilog
-autocmd BufRead,BufNewFile *.vs set filetype=verilog_systemverilog
-autocmd BufRead,BufNewFile .bindings-tcsh set filetype=tcsh
-autocmd BufRead,BufNewFile workspace_spawn.conf set filetype=tmux
+if has("autocmd")
+   " Extentions
+   autocmd BufRead,BufNewFile *.rdl set filetype=systemrdl
+   autocmd BufRead,BufNewFile *.tc set filetype=perl
+   autocmd BufRead,BufNewFile *.hdl set filetype=perl
+   autocmd BufRead,BufNewFile *.udf set filetype=perl
+   " autocmd BufRead,BufNewFile *.vs set filetype=systemverilog
+   autocmd BufRead,BufNewFile *.vs set filetype=verilog_systemverilog
+   autocmd BufRead,BufNewFile .bindings-tcsh set filetype=tcsh
+   autocmd BufRead,BufNewFile workspace_spawn.conf set filetype=tmux
 
-"
-" Special settings for filetypes
-"
-autocmd FileType make setlocal noexpandtab
+   " Additional FileType settings
+   " autocmd FileType verilog_systemverilog compiler vcs
+   autocmd FileType make setlocal noexpandtab
+endif
+
 
 " ----------------------------------------------------------------------------
 " Key Mappings
@@ -717,13 +815,13 @@ autocmd FileType make setlocal noexpandtab
 " Function Key Summary !!!!
 " F1  : OUTSIDE (VNC Menu)
 " F2  :
-" F3  :
+" F3  : Calculator 22
 " F4  :
-" F5  :
-" F6  :
-" F7  :
+" F5  : Hdk Compile
+" F6  : Re-parse a simbuild log
+" F7  : Toggle Code Folding
 " F8  : Buffers to Tabs
-" F9  : Toggle Code Folding
+" F9  : Hdk Clean Compile
 " F10 : Toggle case invariant searching
 " F11 : OUTSIDE - terminal full screen
 " F12 : something weird (TODO look up)
@@ -731,19 +829,32 @@ autocmd FileType make setlocal noexpandtab
 " SPACE - map to colin
 nnoremap <space> :
 
+" F3 - Calulator
+" while editing, hit F3 in the insert mode and type expression to calulate 
+imap <silent> <F3> <C-R>=string(eval(input("Calculate: ")))<CR>
+
+" F5 - Hdk Compile
+nnoremap <silent><F5> :HdkCompile<CR>
+
+" F6 - Re-parse a simbuild log stored at g:hdk#logname
+nnoremap <silent><F6> :HdkReload<CR>
+
+" F7 - Toggle Code Folding
+" http://vim.wikia.com/wiki/Folding?useskin=monobook
+" With the following in your vimrc, you can toggle folds open/closed by pressing F9.
+" In addition, if you have :set foldmethod=manual, you can visually select some lines,
+" then press F7 to create a fold.
+inoremap <F7> <C-O>za
+nnoremap <F7> za
+onoremap <F7> <C-C>za
+vnoremap <F7> zf
+
 " F8 - Have all buffers turn into tabs
 let notabs = 0
 nnoremap <silent> <F8> :let notabs=!notabs<Bar>:if notabs<Bar>:tabo<Bar>:else<Bar>:tab ball<Bar>:tabn<Bar>:endif<CR>
 
-" F9 - Toggle Code Folding
-" http://vim.wikia.com/wiki/Folding?useskin=monobook
-" With the following in your vimrc, you can toggle folds open/closed by pressing F9.
-" In addition, if you have :set foldmethod=manual, you can visually select some lines,
-" then press F9 to create a fold.
-inoremap <F9> <C-O>za
-nnoremap <F9> za
-onoremap <F9> <C-C>za
-vnoremap <F9> zf
+" F9 - Hdk Clean Compile
+nnoremap <silent> <F9> :HdkCleanCompile<CR>
 
 " F10 - Toggle Smartcase
 nnoremap <F10> :set smartcase!<CR>
@@ -798,6 +909,9 @@ nmap <leader>d :colorscheme default<CR>
 
 " Shortcut to auto-format. Requires vim-autoformat plugin
 nmap <leader>af :Autoformat<CR>
+
+" Map to function to switch to header file by the same name
+nmap <silent> <leader>sh :call ToggleHeader()<CR>
 
 " Shift + Direction to Move Tabs ----------------------
 nnoremap <silent> <S-h> :execute 'silent! tabmove ' . (tabpagenr()-2)<CR>
@@ -944,6 +1058,10 @@ vnoremap <silent> y y`]
 vnoremap <silent> p p`]
 nnoremap <silent> p p`]
 
+" Paste the timestamp
+nnoremap <leader>tt "=strftime("%y%b%d %H:%M:%S")<CR>P
+inoremap <leader>tt <C-R>=strftime("%y%b%d %H:%M:%S")<CR>
+"
 " Prevent replacing paste buffer on paste:
 " I can select some text and paste over it without worrying if my paste buffer was replaced by the just removed text (place it close to end of ~/vimrc).
 " vp doesn't replace paste buffer
@@ -969,6 +1087,36 @@ vmap <silent> <expr> p <sid>Repl()
 " Remapping it to move left
 nnoremap <BS> h
 
+" Merge shortcuts for vim when merging git repos
+" +----------------------------+
+" | LOCAL  |   BASE   | REMOTE |
+" +----------------------------+
+" |           MERGED           |
+" +----------------------------+
+if &diff
+   " get from REMOTE into MERGED
+   nnoremap d1 :diffg RE<CR>
+   " get from BASE into MERGED
+   nnoremap d2 :diffg BA<CR>
+   " get from LOCAL into MERGED
+   nnoremap d3 :diffg LO<CR>
+endif
+
+"----------------------------------------------------------------------------
+" Repo Specific Settings 
+"----------------------------------------------------------------
+if empty($LOCAL_MODEL_ROOT)
+   let g:ctrlp_cache_dir = '/tmp/naharwar/.flow/ctrlp'
+else
+   let g:model_root_vim_settings = $LOCAL_MODEL_ROOT . '/.flow/model_vim_settings'
+   if filereadable(expand(g:model_root_vim_settings))
+      execute 'source '.fnameescape(g:model_root_vim_settings)
+   endif
+   " model_vim_settings expected to contain
+   " set tags=$LOCAL_MODEL_ROOT/tags
+   " let g:ctrlp_cache_dir = $LOCAL_MODEL_ROOT . '/.flow/ctrlp'
+endif
+
 "----------------------------------------------------------------------------
 " AUTO RELOAD
 "----------------------------------------------------------------
@@ -981,6 +1129,17 @@ augroup END
 
 " Highlight trailing whitespace in some color for certail code files (don't want this in logs)
 autocmd BufRead,BufNewFile *.rdl,*.sv,*.vs,*.svh,*.vh,*.c,*.cpp,*.perl,*.pl,*.h,*.hpp,.vimrc call HighlightTrailingWhitespace()
+
+" FIXME
+" let g:LargeFile=100 " Large files are > 100M
+" " Files become read only
+" if !exists("my_auto_commands_loaded")
+"   let my_auto_commands_loaded = 1
+"   let g:LargeFile = 1024 * 1024 * 10
+"   augroup LargeFile
+"   autocmd BufReadPre * let f=expand("<afile>") | if getfsize(f) > g:LargeFile | set eventignore+=FileType | setlocal noswapfile bufhidden=unload buftype=nowrite undolevels=-1 | els
+"   augroup END
+" endif
 
 "------------------------------------------------------------------------------
 " Terminal Scrolling FIXME find a better solution
@@ -998,7 +1157,10 @@ function! EnterNormalMode()
     endif
 endfunction
 
-tmap <silent> <ScrollWheelUp> <c-w>:call EnterNormalMode()<CR>
+if v:version >= 800 
+   tmap <silent> <ScrollWheelUp> <c-w>:call EnterNormalMode()<CR>
+endif
+
 "------------------------------------------------------------------------------
 " My functions
 " -----------------------------------------------------------------------------
@@ -1085,3 +1247,39 @@ function! CurTime()
   return ftime
 endfunction
 
+" Switch between header and source if they have the same name 
+" TODO make it open tabs and switch between them
+function! ToggleHeader()
+    let extension = expand('%:e')
+    let root = expand('%:r')
+    if extension == 'cpp'
+        execute(':e '.root.'.h')
+    elseif extension == 'h'
+        execute(':e '.root.'.cpp')
+    elseif extension == 'sv'
+        execute(':e '.root.'.svh')
+    elseif extension == 'svh'
+        execute(':e '.root.'.sv')
+    endif
+endfunc
+
+" FIXME wrap this in a "isDispatchPluginAvailable" sort of if statment
+command! -nargs=0 Tig :Start -dir=%:p:h -title=tig -wait=always tig 
+
+" https://vim.fandom.com/wiki/Display_output_of_shell_commands_in_new_window
+function! s:ExecuteInShell(command)
+  let command = join(map(split(a:command), 'expand(v:val)'))
+  let winnr = bufwinnr('^' . command . '$')
+  silent! execute  winnr < 0 ? 'botright vnew ' . fnameescape(command) : winnr . 'wincmd w'
+  setlocal buftype=nowrite bufhidden=wipe nobuflisted noswapfile nowrap number
+  echo 'Execute ' . command . '...'
+  silent! execute 'silent %!'. command
+  silent! execute 'resize '
+  silent! redraw
+  silent! execute 'au BufUnload <buffer> execute bufwinnr(' . bufnr('#') . ') . ''wincmd w'''
+  silent! execute 'nnoremap <silent> <buffer> <LocalLeader>r :call <SID>ExecuteInShell(''' . command . ''')<CR>'
+  echo 'Shell command ' . command . ' executed.'
+endfunction
+command! -complete=shellcmd -nargs=+ Shell call s:ExecuteInShell(<q-args>)
+
+endif

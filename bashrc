@@ -24,6 +24,10 @@ if grep -qE "(Microsoft|WSL)" /proc/version &> /dev/null ; then
 #  echo "Anything else"
 fi
 
+# I never need XOFF (freezes vim)
+bind -r '\C-s'
+stty -ixon
+
 # History
 export HISTSIZE=9000
 export HISTCONTROL=ignoredups:erasedups #don't write duplicate entries.
