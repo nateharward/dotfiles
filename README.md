@@ -14,7 +14,8 @@ contains:
 * TMUX .tmux.conf
 * BASH .bashrc.$USER (sourced by .bashrc)
 
-
+todo
+* gitconfig
 
 #### Proxy setup notes
 
