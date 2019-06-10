@@ -138,7 +138,6 @@ Plug 'sodapopcan/vim-twiggy'
 " Asynchronous Lint Engine
 Plug 'w0rp/ale'
 
-""" Languages plugins
 " Syntax highlighting for SystemRDL files
 Plug 'vim-scripts/systemrdl.vim'
 
@@ -237,7 +236,6 @@ Plug 'ipod825/TagJump'
 " TODO introduce when ready Plug 'xolox/vim-easytags'
 
 " To place, toggle, display and navigate marks
-Plug 'kshenoy/vim-signature'
 " Keymap:
 " mx        Toggle mark 'x' where x is a-zA-Z
 " dmx       Remove mark 'x' where x is a-zA-Z
@@ -256,6 +254,7 @@ Plug 'kshenoy/vim-signature'
 " ['        Jump to start of prev line containg a mark
 " Highlight signs of marks dynamically based upon state
 " indicated by vim-signify
+Plug 'kshenoy/vim-signature'
 let g:SignatureMarkTextHLDynamic=1
 
 " Mark : Highlight several words in different colors simultaneously
