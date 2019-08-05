@@ -155,7 +155,7 @@ else
 endif
 
 " Edit Bash scripts in Vim/gVim. Insert code snippets, run, check, and debug the code and look up help
-if v:version >= 740 
+if v:version >= 740
    Plug 'WolfgangMehner/bash-support'
 endif
 
@@ -217,7 +217,7 @@ Plug 'ctrlpvim/ctrlp.vim'
 " 🐉  Dark powered asynchronous unite all interfaces for Neovim/Vim8
 Plug 'Shougo/denite.nvim'
 
-" dispatch.vim: Asynchronous build and test dispatcher 
+" dispatch.vim: Asynchronous build and test dispatcher
 Plug 'tpope/vim-dispatch'
 
 " A nice customizable popup menu for vim
@@ -261,7 +261,7 @@ let g:SignatureMarkTextHLDynamic=1
 " <Leader> m : mark stuff like star command
 " <Leader> n : clear mark " HACK DISABLED
 " <Leader> * : jump forward on current mark
-" <Leader> / : jump backwards on current mark " HACK DISABLED 
+" <Leader> / : jump backwards on current mark " HACK DISABLED
 Plug 'inkarkat/vim-ingo-library' " Required by vim-mark
 Plug 'inkarkat/vim-mark'
 
@@ -330,17 +330,17 @@ Plug 'terryma/vim-expand-region'
 "Toggles the comment state of the selected line(s). If the topmost selected line is commented, all selected lines are uncommented and vice versa.
 "  [count]<leader>c<space>
 
-" commentary.vim: comment stuff out 
-" Use gcc to comment out a line (takes a count), 
-" gc to comment out the target of a motion (for example, gcap to comment out a paragraph), 
-" gc in visual mode to comment out the selection, and 
+" commentary.vim: comment stuff out
+" Use gcc to comment out a line (takes a count),
+" gc to comment out the target of a motion (for example, gcap to comment out a paragraph),
+" gc in visual mode to comment out the selection, and
 " gc in operator pending mode to target a comment.
 Plug 'tpope/vim-commentary'
 
 " Vim script for text filtering and alignment
 Plug 'godlygeek/tabular'
 
-" Vim motions on speed! 
+" Vim motions on speed!
 Plug 'easymotion/vim-easymotion'
 let g:EasyMotion_smartcase = 1
 map <Leader>j <Plug>(easymotion-j)
@@ -520,7 +520,7 @@ set undofile
 set undodir  =$HOME/.vim/files/undo/
 
 " viminfo files
-set viminfo     ='100,n$HOME/.vim/files/info/viminfo  
+set viminfo     ='100,n$HOME/.vim/files/info/viminfo
 
 " force 256
 "if has('unix')
@@ -710,7 +710,7 @@ if executable('ag')
    let g:ackprg = 'ag --vimgrep' " will report every match on the line
 endif
 
-" unnless we have pt, use that instead of ag or ack 
+" unnless we have pt, use that instead of ag or ack
 if executable('pt')
    let g:ackprg = 'pt --nogroup --nocolor --column'
 endif
@@ -828,7 +828,7 @@ endif
 nnoremap <space> :
 
 " F3 - Calulator
-" while editing, hit F3 in the insert mode and type expression to calulate 
+" while editing, hit F3 in the insert mode and type expression to calulate
 imap <silent> <F3> <C-R>=string(eval(input("Calculate: ")))<CR>
 
 " F5 - Hdk Compile
@@ -1101,7 +1101,7 @@ if &diff
 endif
 
 "----------------------------------------------------------------------------
-" Repo Specific Settings 
+" Repo Specific Settings
 "----------------------------------------------------------------
 if empty($LOCAL_MODEL_ROOT)
    let g:ctrlp_cache_dir = '/tmp/naharwar/.flow/ctrlp'
@@ -1155,7 +1155,7 @@ function! EnterNormalMode()
     endif
 endfunction
 
-if v:version >= 800 
+if v:version >= 800
    tmap <silent> <ScrollWheelUp> <c-w>:call EnterNormalMode()<CR>
 endif
 
@@ -1245,7 +1245,7 @@ function! CurTime()
   return ftime
 endfunction
 
-" Switch between header and source if they have the same name 
+" Switch between header and source if they have the same name
 " TODO make it open tabs and switch between them
 function! ToggleHeader()
     let extension = expand('%:e')
@@ -1262,7 +1262,7 @@ function! ToggleHeader()
 endfunc
 
 " FIXME wrap this in a "isDispatchPluginAvailable" sort of if statment
-command! -nargs=0 Tig :Start -dir=%:p:h -title=tig -wait=always tig 
+command! -nargs=0 Tig :Start -dir=%:p:h -title=tig -wait=always tig
 
 " https://vim.fandom.com/wiki/Display_output_of_shell_commands_in_new_window
 function! s:ExecuteInShell(command)
