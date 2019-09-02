@@ -297,6 +297,9 @@ Plug 'tmux-plugins/vim-tmux'
 " unimpaired.vim: pairs of handy bracket mappings
 Plug 'tpope/vim-unimpaired'
 
+" ansi escape sequences concealed, but highlighted as specified (conceal)
+Plug 'vim-scripts/AnsiEsc.vim'
+
 " Vim plugin that provides additional text objects
 " CHEATSHEET https://raw.githubusercontent.com/wellle/targets.vim/master/cheatsheet.md
 Plug 'wellle/targets.vim'

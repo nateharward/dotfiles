@@ -42,12 +42,13 @@ else
    export INFOPATH="$(brew --prefix)/share/info:$INFOPATH"
 fi
 
+
+# Fix for bashit slowness
+# https://github.com/Bash-it/bash-it/issues/914
+export THEME_CHECK_SUDO=FALSE
+
 # Load Bash It Settings and Bashit itself
 source "$HOME"/.bashrc.bashit
-
-# Partial fix for bashit slowness
-# https://github.com/Bash-it/bash-it/issues/914
-PS1="\n$(battery_char) ${yellow} ${purple}\h ${reset_color}in ${green}\w\n${bold_cyan}$(scm_char)${green}→${reset_color} "
 
 if [ -r $HOME/.aliases-bash-personal ]; then
   source $HOME/.aliases-bash-personal
