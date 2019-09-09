@@ -36,6 +36,8 @@ shopt -s histappend # append to the history file, instead of the default which i
 # Linuxbrew
 if [[ $HOSTNAME =~ ^.*\.intel.com$ ]]; then # on work machine
    export ONWORKMACHINE=1
+elif [[ $SHELL =~ ^.*intel.*$ ]]; then # on work machine
+   export ONWORKMACHINE=1
 else
    PATH="$DOTFILES/brew/bin:$PATH"
    export MANPATH="$(brew --prefix)/share/man:$MANPATH"
