@@ -341,6 +341,9 @@ Plug 'terryma/vim-expand-region'
 Plug 'tpope/vim-commentary'
 
 " Vim script for text filtering and alignment
+" * :Tab /:     lines up colon
+" * :Tab/|      lines up pipe-delimited tables
+" * :Tab /:\zs  lines up stuff after colon
 Plug 'godlygeek/tabular'
 
 " Vim motions on speed!
