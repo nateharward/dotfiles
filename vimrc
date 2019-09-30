@@ -415,12 +415,13 @@ endif
 " lean & mean status/tabline for vim that's light as air
 Plug 'vim-airline/vim-airline'
 let g:airline_powerline_fonts = 1
+" set this when git performance is slow
+" let g:airline#extensions#hunks#enabled=0
+" let g:airline#extensions#branch#enabled=0
 
 " A collection of themes for vim-airline
 Plug 'vim-airline/vim-airline-themes'
 let g:airline_theme='base16_flat'
-" set this when git performance is slow
-"    let g:airline#extensions#branch#enabled = 0
 
 " Simple tmux statusline generator with support for powerline symbols and statusline / airline / lightline integration
 Plug 'edkolev/tmuxline.vim'
