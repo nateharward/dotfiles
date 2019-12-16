@@ -807,6 +807,7 @@ if has("autocmd")
    autocmd BufRead,BufNewFile *.vs set filetype=verilog_systemverilog
    autocmd BufRead,BufNewFile .bindings-tcsh set filetype=tcsh
    autocmd BufRead,BufNewFile workspace_spawn.conf set filetype=tmux
+   autocmd BufRead,BufNewFile *.list set filetype=sh
 
    " Additional FileType settings
    " autocmd FileType verilog_systemverilog compiler vcs
