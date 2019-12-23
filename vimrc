@@ -298,6 +298,7 @@ Plug 'tmux-plugins/vim-tmux'
 Plug 'tpope/vim-unimpaired'
 
 " ansi escape sequences concealed, but highlighted as specified (conceal)
+" type :AnsiEsc
 Plug 'vim-scripts/AnsiEsc.vim'
 
 " Vim plugin that provides additional text objects
