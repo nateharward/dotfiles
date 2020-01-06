@@ -180,10 +180,6 @@ Plug 'Kuniwak/vint'
 " A modern vim plugin for editing LaTeX files.
 Plug 'lervag/vimtex'
 
-" Log file highlighting
-" TODO merge into vim-intel repo
-Plug '~/repos/logssim'
-
 """
 
 """ Tags, Searching, showing heiarchy, files
@@ -392,6 +388,10 @@ Plug 'mphe/grayout.vim'
 
 " Text outlining and task management for Vim based on Emacs' Org-Mode
 Plug 'jceb/vim-orgmode'
+
+" Silly game to show off the new features of Vim 8.2:
+" to start :KillKillKill
+Plug 'vim/killersheep'
 
 """
 
@@ -1067,8 +1067,9 @@ vnoremap <silent> p p`]
 nnoremap <silent> p p`]
 
 " Paste the timestamp
-nnoremap <leader>tt "=strftime("%y%b%d %H:%M:%S")<CR>P
-inoremap <leader>tt <C-R>=strftime("%y%b%d %H:%M:%S")<CR>
+nnoremap <leader>tt "=strftime("%Yww%V.%u_%k_%M_%S")<CR>P
+inoremap <leader>tt <C-R>=strftime("%Yww%V.%u_%k_%M_%S")<CR>
+
 "
 " Prevent replacing paste buffer on paste:
 " I can select some text and paste over it without worrying if my paste buffer was replaced by the just removed text (place it close to end of ~/vimrc).

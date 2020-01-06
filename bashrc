@@ -1,6 +1,10 @@
 # exit if non-interactive
 test "${-#*i}" != "$-" || return 0
 
+# # use this logfile for debugging
+# ec_bashrc_error_log=/tmp/eclogin-errors.$USER
+# echo "I: (.bashrc.$USER) [entering] `/bin/date`" >> $ec_env_error_log
+
 export DOTFILES=$HOME/repos/dotfiles
 
 BASE16_SHELL=$DOTFILES/base16-shell/
@@ -62,3 +66,7 @@ fi
 
 # Load machine specific files
 source $HOME/.bashrc.work
+
+# echo "I: (.bashrc.$USER) [leaving] `/bin/date`" >> $ec_env_error_log
+# unset ec_bashrc_error_log
+# 
