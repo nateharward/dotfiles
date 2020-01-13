@@ -305,6 +305,9 @@ Plug 'wellle/targets.vim'
 " FIXME look at closely and make it work for linux
 " Plug 'zerowidth/vim-copy-as-rtf'
 
+" Txtfmt (The Vim Highlighter) : Rich text highlighting in Vim! (colors, underline, bold, italic, etc...)
+Plug 'bpstahlman/txtfmt'
+
 " Vim plugin that allows you to visually select increasingly larger regions of text using the same key combination.
 Plug 'terryma/vim-expand-region'
 
