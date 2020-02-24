@@ -1069,7 +1069,7 @@ vnoremap <silent> y y`]
 vnoremap <silent> p p`]
 nnoremap <silent> p p`]
 
-" Paste the timestamp
+" Paste the timestamp / date
 nnoremap <leader>tt "=strftime("%Yww%V.%u_%k_%M_%S")<CR>P
 inoremap <leader>tt <C-R>=strftime("%Yww%V.%u_%k_%M_%S")<CR>
 
