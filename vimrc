@@ -955,6 +955,9 @@ nnoremap <leader>sb :source ~/.vimrc_background<CR>
 " Set working directory
 nnoremap <leader>. :lcd %:p:h<CR>
 
+" TODO make a map for this replacement from fs to us
+" %s/\(\d\+\)\(\d\d\d\)\d\d\d\d\d\d fs/\1.\2 us/g
+
 " Filter to search result LEADER + /
 " :redir @a         redirect output to register a
 " :g//              repeat last global command
