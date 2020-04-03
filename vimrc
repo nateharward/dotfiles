@@ -91,9 +91,16 @@ inoremap <C-U> <C-G>u<C-U>
 " task
 
 " Download plugin manager if not already downloaded
-if empty(glob('~/.vim/autoload/plug.vim'))
-   silent execute "!curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
-   autocmd VimEnter * PlugInstall | source $MYVIMRC
+if has('win32')
+  if empty(glob('~/vimfiles/autoload/plug.vim'))
+    silent execute "!curl -fLo ~/vimfiles/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
+    autocmd VimEnter * PlugInstall | source $MYVIMRC
+  endif
+else
+  if empty(glob('~/.vim/autoload/plug.vim'))
+    silent execute "!curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
+    autocmd VimEnter * PlugInstall | source $MYVIMRC
+  endif
 endif
 
 call plug#begin('~/.vim/plugged')
