@@ -591,16 +591,16 @@ else
 
    " NON GUI ONLY SETTINGS
 
-   colorscheme default
+   "   colorscheme default
 
    if $TERM !~# 'putty-256color'
-      "   "if &basenotwork=~'true'
-      "if exists('g:base16-vim')
-      if filereadable(expand("~/.vimrc_background"))
-         let base16colorspace=256
+      let base16colorspace=256
+      if !empty($BASE16_THEME)
+         let base_scheme =  'base16-' . $BASE16_THEME
+         exec 'colorscheme ' . base_scheme
+      elseif filereadable(expand("~/.vimrc_background"))
          source ~/.vimrc_background
       endif
-      "endif
    else " if in PUTTY
       " TODO find a good putty scheme
       " let g:solarized_termcolors=256
@@ -623,6 +623,16 @@ else
    endif
 
 endif
+
+function! Putty()
+   " Enable true color
+   if exists('+termguicolors')
+     " let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+     " let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+     set termguicolors
+   endif
+endfunction
+command! -nargs=0 Putty :call Putty()
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugin Settings
@@ -924,7 +934,8 @@ nmap <leader>l :set list!<CR>
 " Shortcut to return to the dafault colorscheme ------------------------------
 " (like when using tmux in putty)
 nmap <leader>d :colorscheme default<CR>
-
+nmap <leader>dd :source ~/.vimrc_background<CR>
+         
 " Shortcut to auto-format. Requires vim-autoformat plugin
 nmap <leader>af :Autoformat<CR>
 

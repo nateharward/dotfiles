@@ -16,8 +16,9 @@ xterm*xftAntialias: true
 xterm*faceName: DejaVuSansMono Nerd Font Mono
 xterm*faceNameDoublesize: DejaVuSansMono Nerd Font
 !xterm*faceSize: 10 ! on personal laptop
-!xterm*faceSize: 20 ! on 2160p screens
-xterm*faceSize: 11 
+!xterm*faceSize: 20 ! on laptop 2160p screens
+!xterm*faceSize: 11 ! On work machine
+xterm*faceSize: 16
 xterm*scrollBar: false
 
 ! Copy and paste with clipboard

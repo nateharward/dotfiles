@@ -10,7 +10,9 @@ export DOTFILES=$HOME/repos/dotfiles
 BASE16_SHELL=$DOTFILES/base16-shell/
 [ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
 
-if [ -e /usr/share/terminfo/x/xterm-256color ]; then
+if   [ -e /usr/share/terminfo/x/xterm-24bit ]; then
+        export TERM='xterm-24bit'
+elif [ -e /usr/share/terminfo/x/xterm-256color ]; then
         export TERM='xterm-256color'
 else
         export TERM='xterm-color'
