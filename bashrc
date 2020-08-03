@@ -5,6 +5,8 @@ test "${-#*i}" != "$-" || return 0
 # ec_bashrc_error_log=/tmp/eclogin-errors.$USER
 # echo "I: (.bashrc.$USER) [entering] `/bin/date`" >> $ec_env_error_log
 
+export EDITOR="vim -p"
+
 export DOTFILES=$HOME/repos/dotfiles
 
 BASE16_SHELL=$DOTFILES/base16-shell/
