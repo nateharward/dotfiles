@@ -719,12 +719,13 @@ let g:tagbar_type_systemverilog = {
 let g:workspace_autosave_untrailspaces = 0
 
 " Use TMUX window name in the workspace session save to isolate sessions
-if empty($tmux)
-   let g:workspace_session_name = 'session.vim'
-else
-   let g:tmux_window_name = systemlist( "tmux display-message -p '#w'")[0]
-   let g:workspace_session_name = g:tmux_window_name . '-session.vim'
-endif
+"FIXME  if empty($TMUX)
+           let g:workspace_session_name = 'session.vim'
+"FIXME  else
+"FIXME     " TODO doesn't get the right name
+"FIXME     let g:tmux_window_name = systemlist( "tmux display-message -p '#w'")[0]
+"FIXME     let g:workspace_session_name = g:tmux_window_name . '-session.vim'
+"FIXME  endif
 
 " Replace grep with pt
 if executable('pt')
