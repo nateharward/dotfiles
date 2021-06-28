@@ -187,6 +187,23 @@ Plug 'Kuniwak/vint'
 " A modern vim plugin for editing LaTeX files.
 Plug 'lervag/vimtex'
 let g:tex_flavor = 'latex'
+
+" TODO
+" https://gitlab.devtools.intel.com/cbheitho/Cheetah2.vim
+" Vim plugin optimized for the filetypes in the Cheetah2 design environment.
+"
+
+" TODO
+" https://gitlab.devtools.intel.com/cbheitho/TclComplete
+" Vim auto-completion plugin for Tcl, especially Synopsys Tcl.
+"
+
+" TODO
+" https://gitlab.devtools.intel.com/cbheitho/itools
+" Vim auto-completion plugin for editing your .itools file
+"
+
+
 """
 
 """ Tags, Searching, showing heiarchy, files
