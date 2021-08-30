@@ -1,5 +1,12 @@
+#       AUTHOR: Nathan A Harward, nateharward@gmail.com
+# ORGANIZATION: self, personal dot file
+#      COMPANY: self, personal dot file
+
 # exit if non-interactive
 test "${-#*i}" != "$-" || return 0
+
+nate_error_log=/tmp/nate-errors
+echo "I: (.bashrc.naharwar) [entering] `/bin/date`" >> $nate_error_log
 
 # # use this logfile for debugging
 # ec_bashrc_error_log=/tmp/eclogin-errors.$USER
@@ -71,6 +78,5 @@ fi
 # Load machine specific files
 source $HOME/.bashrc.work
 
-# echo "I: (.bashrc.$USER) [leaving] `/bin/date`" >> $ec_env_error_log
-# unset ec_bashrc_error_log
-# 
+echo "I: (.bashrc.naharwar) [leaving] `/bin/date`" >> $nate_error_log
+unset nate_error_log
