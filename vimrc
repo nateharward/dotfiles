@@ -189,18 +189,18 @@ Plug 'lervag/vimtex'
 let g:tex_flavor = 'latex'
 
 " TODO
-" https://gitlab.devtools.intel.com/cbheitho/Cheetah2.vim
 " Vim plugin optimized for the filetypes in the Cheetah2 design environment.
+Plug 'https://gitlab.devtools.intel.com/cbheitho/Cheetah2.vim'
 "
 
 " TODO
-" https://gitlab.devtools.intel.com/cbheitho/TclComplete
 " Vim auto-completion plugin for Tcl, especially Synopsys Tcl.
+Plug 'https://gitlab.devtools.intel.com/cbheitho/TclComplete'
 "
 
 " TODO
-" https://gitlab.devtools.intel.com/cbheitho/itools
 " Vim auto-completion plugin for editing your .itools file
+Plug 'https://gitlab.devtools.intel.com/cbheitho/itools'
 "
 
 
@@ -446,6 +446,12 @@ let g:airline_powerline_fonts = 1
 " set this when git performance is slow
 " let g:airline#extensions#hunks#enabled=0
 " let g:airline#extensions#branch#enabled=0
+" Enable the list of buffers
+let g:airline#extensions#tabline#enabled = 1
+" Show just the filename
+let g:airline#extensions#tabline#fnamemod = ':t'
+
+
 
 " A collection of themes for vim-airline
 Plug 'vim-airline/vim-airline-themes'
@@ -1280,6 +1286,17 @@ function! SummarizeTabs()
       echohl None
    endtry
 endfunction
+
+" Append modeline after last line in buffer.
+" Use substitute() instead of printf() to handle '%%s' modeline in LaTeX
+" files.
+function! AppendModeline()
+  let l:modeline = printf(" vim: set ts=%d sw=%d tw=%d %set :",
+        \ &tabstop, &shiftwidth, &textwidth, &expandtab ? '' : 'no')
+  let l:modeline = substitute(&commentstring, "%s", l:modeline, "")
+  call append(line("$"), l:modeline)
+endfunction
+nnoremap <silent> <Leader>ml :call AppendModeline()<CR>
 
 command! -nargs=* FileTime echo FileTime()
 function! FileTime()
