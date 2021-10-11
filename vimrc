@@ -109,68 +109,68 @@ call plug#begin('~/.vim/plugged')
 " fugitive.vim: a Git wrapper so awesome, it should be illegal
 Plug 'tpope/vim-fugitive'
 
-" gitk for Vim
-Plug 'gregsexton/gitv', {'on': ['Gitv']}
-
-" A Vim plugin which shows a git diff in the gutter (sign column) and stages/undoes hunks.
-if v:version >= 740
-   Plug 'airblade/vim-gitgutter'
-endif
-
-" A git commit browser in Vim
-" - `:GV` to open commit browser
-" - `:GV!` will only list commits that affected the current file
-" - `]]` and `[[` to move between commits
-Plug 'junegunn/gv.vim'
-
-" Ease your git workflow within Vim
-" - `:Magit`  Open magit buffer with [:Magit](#magitshow_magit) command.
-" - `<C-n>`   Jump to next hunk with `<C-n>`, or move the cursor as you like. The cursor is on a hunk.
-" - `S`       While the cursor is on an unstaged hunk, press `S` in Normal mode: the hunk is now staged, and appears in "Staged changes" section (you can also unstage a hunk from "Staged section" with `S`).
-" - `CC`      Once you have stage all the required changes, press `CC`.
-Plug 'jreybert/vimagit'
-
-" Git branch management for Vim
-Plug 'sodapopcan/vim-twiggy'
-
-" TODO look at this async git plugin
-" Plug 'lambdalisue/gina.vim'
-
-" TODO look at this plugin that helps with merging
-" Plug 'sjl/threesome.vim'
+""" PERF  " gitk for Vim
+""" PERF  Plug 'gregsexton/gitv', {'on': ['Gitv']}
+""" PERF  
+""" PERF  " A Vim plugin which shows a git diff in the gutter (sign column) and stages/undoes hunks.
+""" PERF  if v:version >= 740
+""" PERF     Plug 'airblade/vim-gitgutter'
+""" PERF  endif
+""" PERF  
+""" PERF  " A git commit browser in Vim
+""" PERF  " - `:GV` to open commit browser
+""" PERF  " - `:GV!` will only list commits that affected the current file
+""" PERF  " - `]]` and `[[` to move between commits
+""" PERF  Plug 'junegunn/gv.vim'
+""" PERF  
+""" PERF  " Ease your git workflow within Vim
+""" PERF  " - `:Magit`  Open magit buffer with [:Magit](#magitshow_magit) command.
+""" PERF  " - `<C-n>`   Jump to next hunk with `<C-n>`, or move the cursor as you like. The cursor is on a hunk.
+""" PERF  " - `S`       While the cursor is on an unstaged hunk, press `S` in Normal mode: the hunk is now staged, and appears in "Staged changes" section (you can also unstage a hunk from "Staged section" with `S`).
+""" PERF  " - `CC`      Once you have stage all the required changes, press `CC`.
+""" PERF  Plug 'jreybert/vimagit'
+""" PERF  
+""" PERF  " Git branch management for Vim
+""" PERF  Plug 'sodapopcan/vim-twiggy'
+""" PERF  
+""" PERF  " TODO look at this async git plugin
+""" PERF  " Plug 'lambdalisue/gina.vim'
+""" PERF  
+""" PERF  " TODO look at this plugin that helps with merging
+""" PERF  " Plug 'sjl/threesome.vim'
 
 """
 
 """ Languages plugins and linters
-" Asynchronous Lint Engine
-Plug 'w0rp/ale'
-
-" Syntax highlighting for SystemRDL files
-Plug 'vim-scripts/systemrdl.vim'
-
-" Additional Vim syntax highlighting for C++ (including C++11/14)
-Plug 'octol/vim-cpp-enhanced-highlight'
-
-" Support for Perl 5 and Perl 6 in Vim
-Plug 'vim-perl/vim-perl', { 'for': 'perl', 'do': 'make clean carp dancer highlight-all-pragmas moose test-more try-tiny' }
-
-" Reason language
-if v:version > 800
-   Plug 'reasonml-editor/vim-reason-plus'
-else
-   Plug 'reasonml-editor/vim-reason-legacy'
-endif
+""" PERF  " Asynchronous Lint Engine
+""" PERF  Plug 'w0rp/ale'
+""" PERF  
+""" PERF  " Syntax highlighting for SystemRDL files
+""" PERF  Plug 'vim-scripts/systemrdl.vim'
+""" PERF  
+""" PERF  " Additional Vim syntax highlighting for C++ (including C++11/14)
+""" PERF  Plug 'octol/vim-cpp-enhanced-highlight'
+""" PERF  
+""" PERF  " Support for Perl 5 and Perl 6 in Vim
+""" PERF  Plug 'vim-perl/vim-perl', { 'for': 'perl', 'do': 'make clean carp dancer highlight-all-pragmas moose test-more try-tiny' }
+""" PERF  
+""" PERF  " Reason language
+""" PERF  if v:version > 800
+""" PERF     Plug 'reasonml-editor/vim-reason-plus'
+""" PERF  else
+""" PERF     Plug 'reasonml-editor/vim-reason-legacy'
+""" PERF  endif
 
 " Edit Bash scripts in Vim/gVim. Insert code snippets, run, check, and debug the code and look up help
 if v:version >= 740
    Plug 'WolfgangMehner/bash-support'
 endif
 
-" Go development plugin for Vim
-if v:version > 740
-   Plug 'fatih/vim-go'
-endif
-
+""" PERF  " Go development plugin for Vim
+""" PERF  if v:version > 740
+""" PERF     Plug 'fatih/vim-go'
+""" PERF  endif
+""" PERF  
 " OVM systemverilog plugin
 " NOTE works well, can fall back on this if hacked version below gives trouble
 " Plug '~/.vim/bundle_back/vim_ovm/'
@@ -181,27 +181,27 @@ endif
 Plug 'vhda/verilog_systemverilog.vim'
 let g:verilog_efm_level = "lint"
 
-" Fast and Highly Extensible Vim script Language Lint implemented by Python
-Plug 'Kuniwak/vint'
-
-" A modern vim plugin for editing LaTeX files.
-Plug 'lervag/vimtex'
-let g:tex_flavor = 'latex'
-
-" TODO
-" Vim plugin optimized for the filetypes in the Cheetah2 design environment.
-Plug 'https://gitlab.devtools.intel.com/cbheitho/Cheetah2.vim'
-"
-
-" TODO
-" Vim auto-completion plugin for Tcl, especially Synopsys Tcl.
-Plug 'https://gitlab.devtools.intel.com/cbheitho/TclComplete'
-"
-
-" TODO
-" Vim auto-completion plugin for editing your .itools file
-Plug 'https://gitlab.devtools.intel.com/cbheitho/itools'
-"
+""" PERF  " Fast and Highly Extensible Vim script Language Lint implemented by Python
+""" PERF  Plug 'Kuniwak/vint'
+""" PERF  
+""" PERF  " A modern vim plugin for editing LaTeX files.
+""" PERF  Plug 'lervag/vimtex'
+""" PERF  let g:tex_flavor = 'latex'
+""" PERF  
+""" PERF  " TODO
+""" PERF  " Vim plugin optimized for the filetypes in the Cheetah2 design environment.
+""" PERF  Plug 'https://gitlab.devtools.intel.com/cbheitho/Cheetah2.vim'
+""" PERF  "
+""" PERF  
+""" PERF  " TODO
+""" PERF  " Vim auto-completion plugin for Tcl, especially Synopsys Tcl.
+""" PERF  Plug 'https://gitlab.devtools.intel.com/cbheitho/TclComplete'
+""" PERF  "
+""" PERF  
+""" PERF  " TODO
+""" PERF  " Vim auto-completion plugin for editing your .itools file
+""" PERF  Plug 'https://gitlab.devtools.intel.com/cbheitho/itools'
+""" PERF  "
 
 
 """
@@ -220,40 +220,40 @@ nnoremap <leader>n :NERDTreeToggle<CR>
 " XXX too slow on large models, find a way to speed up
 " Plug 'Xuyuanp/nerdtree-git-plugin'
 
-" A class outline viewer for Vim using tags, ordered by scope
-Plug 'majutsushi/tagbar'
-" Map Tagbar to <leader> tb
-nnoremap <silent> <leader>tb :TagbarToggle<CR>
+""" PERF  " A class outline viewer for Vim using tags, ordered by scope
+""" PERF  Plug 'majutsushi/tagbar'
+""" PERF  " Map Tagbar to <leader> tb
+""" PERF  nnoremap <silent> <leader>tb :TagbarToggle<CR>
+""" PERF  
+""" PERF  " Vim plugin for the Perl module / CLI script 'ack'
+""" PERF  Plug 'mileszs/ack.vim'
+""" PERF  
+""" PERF  " platinum searcher
+""" PERF  Plug 'nazo/pt.vim'
+""" PERF  
+""" PERF  " Fuzzy file, buffer, mru, tag, etc finder.
+""" PERF  Plug 'ctrlpvim/ctrlp.vim'
+""" PERF  
+""" PERF  " 🐉  Dark powered asynchronous unite all interfaces for Neovim/Vim8
+""" PERF  Plug 'Shougo/denite.nvim'
 
-" Vim plugin for the Perl module / CLI script 'ack'
-Plug 'mileszs/ack.vim'
-
-" platinum searcher
-Plug 'nazo/pt.vim'
-
-" Fuzzy file, buffer, mru, tag, etc finder.
-Plug 'ctrlpvim/ctrlp.vim'
-
-" 🐉  Dark powered asynchronous unite all interfaces for Neovim/Vim8
-Plug 'Shougo/denite.nvim'
-
-" dispatch.vim: Asynchronous build and test dispatcher
-Plug 'tpope/vim-dispatch'
-
-" A nice customizable popup menu for vim
-Plug 'skywind3000/quickmenu.vim'
-
-" Perform all your vim insert mode completions with Tab
-Plug 'ervandew/supertab'
-
-" Make tag jumping in vim behave more like other IDE
-" XXX Trying this out temporarily
-" Use Ctrl-] to jump to tag and Ctrl-t to jump back
-Plug 'ipod825/TagJump'
-
-" Automated tag file generation and syntax highlighting of tags in Vim http://peterodding.com/code/vim/easytags
-" TODO this might require additional setup to make it scale with large projects: https://github.com/xolox/vim-easytags
-" TODO introduce when ready Plug 'xolox/vim-easytags'
+""" PERF  " dispatch.vim: Asynchronous build and test dispatcher
+""" PERF  Plug 'tpope/vim-dispatch'
+""" PERF  
+""" PERF  " A nice customizable popup menu for vim
+""" PERF  Plug 'skywind3000/quickmenu.vim'
+""" PERF  
+""" PERF  " Perform all your vim insert mode completions with Tab
+""" PERF  Plug 'ervandew/supertab'
+""" PERF  
+""" PERF  " Make tag jumping in vim behave more like other IDE
+""" PERF  " XXX Trying this out temporarily
+""" PERF  " Use Ctrl-] to jump to tag and Ctrl-t to jump back
+""" PERF  Plug 'ipod825/TagJump'
+""" PERF  
+""" PERF  " Automated tag file generation and syntax highlighting of tags in Vim http://peterodding.com/code/vim/easytags
+""" PERF  " TODO this might require additional setup to make it scale with large projects: https://github.com/xolox/vim-easytags
+""" PERF  " TODO introduce when ready Plug 'xolox/vim-easytags'
 
 " To place, toggle, display and navigate marks
 " Keymap:
@@ -277,63 +277,63 @@ Plug 'ipod825/TagJump'
 Plug 'kshenoy/vim-signature'
 let g:SignatureMarkTextHLDynamic=1
 
-" Mark : Highlight several words in different colors simultaneously
-" <Leader> m : mark stuff like star command
-" <Leader> n : clear mark " HACK DISABLED
-" <Leader> * : jump forward on current mark
-" <Leader> / : jump backwards on current mark " HACK DISABLED
-Plug 'inkarkat/vim-ingo-library' " Required by vim-mark
-Plug 'inkarkat/vim-mark'
-
-" Eclipse like task list
-Plug 'vim-scripts/TaskList.vim'
-" Map TaskList to <leader> tl
-nnoremap <silent> <leader>tl :TaskList<CR>
-
-" NERDTree and tabs together in Vim
-"  Plug 'jistr/vim-nerdtree-tabs', { 'on': 'NERDTreeTabsToggle' }
-"Plug 'jistr/vim-nerdtree-tabs'
-" Map NERDTreeToggle to \n
-"nnoremap <leader>n :NERDTreeTabsToggle<CR>
-
-" Vim plugin to list, select and switch between buffers.
-" <leader>b to use, <ctrl>T to open in new tab
-" gb (or <M-b>) and gB (or <M-S-b>) to flip through the MRU buffer stack
-Plug 'jeetsukumaran/vim-buffergator'
+""" PERF  " Mark : Highlight several words in different colors simultaneously
+""" PERF  " <Leader> m : mark stuff like star command
+""" PERF  " <Leader> n : clear mark " HACK DISABLED
+""" PERF  " <Leader> * : jump forward on current mark
+""" PERF  " <Leader> / : jump backwards on current mark " HACK DISABLED
+""" PERF  Plug 'inkarkat/vim-ingo-library' " Required by vim-mark
+""" PERF  Plug 'inkarkat/vim-mark'
+""" PERF  
+""" PERF  " Eclipse like task list
+""" PERF  Plug 'vim-scripts/TaskList.vim'
+""" PERF  " Map TaskList to <leader> tl
+""" PERF  nnoremap <silent> <leader>tl :TaskList<CR>
+""" PERF  
+""" PERF  " NERDTree and tabs together in Vim
+""" PERF  "  Plug 'jistr/vim-nerdtree-tabs', { 'on': 'NERDTreeTabsToggle' }
+""" PERF  "Plug 'jistr/vim-nerdtree-tabs'
+""" PERF  " Map NERDTreeToggle to \n
+""" PERF  "nnoremap <leader>n :NERDTreeTabsToggle<CR>
+""" PERF  
+""" PERF  " Vim plugin to list, select and switch between buffers.
+""" PERF  " <leader>b to use, <ctrl>T to open in new tab
+""" PERF  " gb (or <M-b>) and gB (or <M-S-b>) to flip through the MRU buffer stack
+""" PERF  Plug 'jeetsukumaran/vim-buffergator'
 """
 
 """ Tmux Related
-" vim plugin to interact with tmux
-Plug 'benmills/vimux'
-
-" Seamless navigation between tmux panes and vim splits
-" Plug 'christoomey/vim-tmux-navigator'
-
-"vim plugin for tmux.conf
-Plug 'tmux-plugins/vim-tmux'
+""" PERF  " vim plugin to interact with tmux
+""" PERF  Plug 'benmills/vimux'
+""" PERF  
+""" PERF  " Seamless navigation between tmux panes and vim splits
+""" PERF  " Plug 'christoomey/vim-tmux-navigator'
+""" PERF  
+""" PERF  "vim plugin for tmux.conf
+""" PERF  Plug 'tmux-plugins/vim-tmux'
 """
 
 """ Usability
-" unimpaired.vim: pairs of handy bracket mappings
-Plug 'tpope/vim-unimpaired'
-
-" ansi escape sequences concealed, but highlighted as specified (conceal)
-" type :AnsiEsc
-Plug 'vim-scripts/AnsiEsc.vim'
-
-" Vim plugin that provides additional text objects
-" CHEATSHEET https://raw.githubusercontent.com/wellle/targets.vim/master/cheatsheet.md
-Plug 'wellle/targets.vim'
-
-" copy rtf for pasting into emails with color syntax etc
-" FIXME look at closely and make it work for linux
-" Plug 'zerowidth/vim-copy-as-rtf'
-
-" Txtfmt (The Vim Highlighter) : Rich text highlighting in Vim! (colors, underline, bold, italic, etc...)
-Plug 'bpstahlman/txtfmt'
-
-" Vim plugin that allows you to visually select increasingly larger regions of text using the same key combination.
-Plug 'terryma/vim-expand-region'
+""" PERF  " unimpaired.vim: pairs of handy bracket mappings
+""" PERF  Plug 'tpope/vim-unimpaired'
+""" PERF  
+""" PERF  " ansi escape sequences concealed, but highlighted as specified (conceal)
+""" PERF  " type :AnsiEsc
+""" PERF  Plug 'vim-scripts/AnsiEsc.vim'
+""" PERF  
+""" PERF  " Vim plugin that provides additional text objects
+""" PERF  " CHEATSHEET https://raw.githubusercontent.com/wellle/targets.vim/master/cheatsheet.md
+""" PERF  Plug 'wellle/targets.vim'
+""" PERF  
+""" PERF  " copy rtf for pasting into emails with color syntax etc
+""" PERF  " FIXME look at closely and make it work for linux
+""" PERF  " Plug 'zerowidth/vim-copy-as-rtf'
+""" PERF  
+""" PERF  " Txtfmt (The Vim Highlighter) : Rich text highlighting in Vim! (colors, underline, bold, italic, etc...)
+""" PERF  Plug 'bpstahlman/txtfmt'
+""" PERF  
+""" PERF  " Vim plugin that allows you to visually select increasingly larger regions of text using the same key combination.
+""" PERF  Plug 'terryma/vim-expand-region'
 
 " comment lines in a program
 " XXX commented out while I try other plugin
@@ -357,68 +357,68 @@ Plug 'terryma/vim-expand-region'
 "Toggles the comment state of the selected line(s). If the topmost selected line is commented, all selected lines are uncommented and vice versa.
 "  [count]<leader>c<space>
 
-" commentary.vim: comment stuff out
-" Use gcc to comment out a line (takes a count),
-" gc to comment out the target of a motion (for example, gcap to comment out a paragraph),
-" gc in visual mode to comment out the selection, and
-" gc in operator pending mode to target a comment.
-Plug 'tpope/vim-commentary'
-
-" Vim script for text filtering and alignment
-" * :Tab /:     lines up colon
-" * :Tab/|      lines up pipe-delimited tables
-" * :Tab /:\zs  lines up stuff after colon
-Plug 'godlygeek/tabular'
-
-" Vim motions on speed!
-Plug 'easymotion/vim-easymotion'
-let g:EasyMotion_smartcase = 1
-map <Leader>j <Plug>(easymotion-j)
-map <Leader>k <Plug>(easymotion-k)
-map <Space>l <Plug>(easymotion-lineforward)
-map <Space>j <Plug>(easymotion-j)
-map <Space>k <Plug>(easymotion-k)
-map <Space>h <Plug>(easymotion-linebackward)
-" nmap s <Plug>(easymotion-overwin-f
+""" PERF  " commentary.vim: comment stuff out
+""" PERF  " Use gcc to comment out a line (takes a count),
+""" PERF  " gc to comment out the target of a motion (for example, gcap to comment out a paragraph),
+""" PERF  " gc in visual mode to comment out the selection, and
+""" PERF  " gc in operator pending mode to target a comment.
+""" PERF  Plug 'tpope/vim-commentary'
+""" PERF  
+""" PERF  " Vim script for text filtering and alignment
+""" PERF  " * :Tab /:     lines up colon
+""" PERF  " * :Tab/|      lines up pipe-delimited tables
+""" PERF  " * :Tab /:\zs  lines up stuff after colon
+""" PERF  Plug 'godlygeek/tabular'
+""" PERF  
+""" PERF  " Vim motions on speed!
+""" PERF  Plug 'easymotion/vim-easymotion'
+""" PERF  let g:EasyMotion_smartcase = 1
+""" PERF  map <Leader>j <Plug>(easymotion-j)
+""" PERF  map <Leader>k <Plug>(easymotion-k)
+""" PERF  map <Space>l <Plug>(easymotion-lineforward)
+""" PERF  map <Space>j <Plug>(easymotion-j)
+""" PERF  map <Space>k <Plug>(easymotion-k)
+""" PERF  map <Space>h <Plug>(easymotion-linebackward)
+""" PERF  " nmap s <Plug>(easymotion-overwin-f
 
 """
 
 """ Etc/Misc
-" Automatically save changes to disk in Vim
-"   disabled by default, search for g:auto_save to see for what I turn it on
-Plug '907th/vim-auto-save'
+""" PERF  " Automatically save changes to disk in Vim
+""" PERF  "   disabled by default, search for g:auto_save to see for what I turn it on
+""" PERF  Plug '907th/vim-auto-save'
 
-" 📑 Automated Vim session management and file auto-save
+" Automated Vim session management and file auto-save
 Plug 'thaerkh/vim-workspace'
 
-" A lightweight implementation of emacs's kill-ring for vim
-Plug 'maxbrunsfeld/vim-yankstack'
+""" PERF  " A lightweight implementation of emacs's kill-ring for vim
+""" PERF  Plug 'maxbrunsfeld/vim-yankstack'
 
 " Provide easy code formatting in Vim by integrating existing code formatters.
 Plug 'Chiel92/vim-autoformat'
 
-" Miscellaneous auto-load Vim scripts http://peterodding.com/code/vim/misc/
-Plug 'xolox/vim-misc'
-
-" repeat.vim: enable repeating supported plugin maps with '.'
-" to make it work with my map functions add silent! call repeat#set("\<Plug>MyWonderfulMap", v:count) at the end
-Plug 'tpope/vim-repeat'
-
-" Improved integration between Vim and its environment (fullscreen, open URL, background command execution) http://peterodding.com/code/vim/shell/
-" Plug 'xolox/vim-shell'
-
-" Interactive command execution in Vim.
-Plug 'Shougo/vimproc.vim', {'do' : 'make'}
-
-" Gray out the colors for unused areas of code (ifdef etc)
-Plug 'mphe/grayout.vim'
-
-" Text outlining and task management for Vim based on Emacs' Org-Mode
-Plug 'jceb/vim-orgmode'
-
-" Silly game to show off the new features of Vim 8.2:
-" to start :KillKillKill
-Plug 'vim/killersheep'
+""" PERF  " Miscellaneous auto-load Vim scripts http://peterodding.com/code/vim/misc/
+""" PERF  Plug 'xolox/vim-misc'
+""" PERF  
+""" PERF  " repeat.vim: enable repeating supported plugin maps with '.'
+""" PERF  " to make it work with my map functions add silent! call repeat#set("\<Plug>MyWonderfulMap", v:count) at the end
+""" PERF  Plug 'tpope/vim-repeat'
+""" PERF  
+""" PERF  " Improved integration between Vim and its environment (fullscreen, open URL, background command execution) http://peterodding.com/code/vim/shell/
+""" PERF  " Plug 'xolox/vim-shell'
+""" PERF  
+""" PERF  " Interactive command execution in Vim.
+""" PERF  Plug 'Shougo/vimproc.vim', {'do' : 'make'}
+""" PERF  
+""" PERF  " Gray out the colors for unused areas of code (ifdef etc)
+""" PERF  Plug 'mphe/grayout.vim'
+""" PERF  
+""" PERF  " Text outlining and task management for Vim based on Emacs' Org-Mode
+""" PERF  Plug 'jceb/vim-orgmode'
+""" PERF  
+""" PERF  " Silly game to show off the new features of Vim 8.2:
+""" PERF  " to start :KillKillKill
+""" PERF  Plug 'vim/killersheep'
 
 """
 
@@ -466,11 +466,11 @@ Plug '~/repos/vim-hdk/'
 
 
 """ Run after everything else
-
-" 🔣 Adds file type glyphs/icons to popular Vim plugins: NERDTree, vim-airline, Powerline, Unite, vim-startify and more
-"   XXX Run last (or at least after the plugins that is modifies
-"   XXX Requires a patched nerd font https://github.com/ryanoasis/nerd-fonts/tree/master/patched-fonts
-Plug 'ryanoasis/vim-devicons'
+""" PERF  
+""" PERF  "  Adds file type glyphs/icons to popular Vim plugins: NERDTree, vim-airline, Powerline, Unite, vim-startify and more
+""" PERF  "   XXX Run last (or at least after the plugins that is modifies
+""" PERF  "   XXX Requires a patched nerd font https://github.com/ryanoasis/nerd-fonts/tree/master/patched-fonts
+""" PERF  Plug 'ryanoasis/vim-devicons'
 
 call plug#end()
 
@@ -959,7 +959,7 @@ nmap <leader>l :set list!<CR>
 " (like when using tmux in putty)
 nmap <leader>d :colorscheme default<CR>
 nmap <leader>dd :source ~/.vimrc_background<CR>
-         
+
 " Shortcut to auto-format. Requires vim-autoformat plugin
 nmap <leader>af :Autoformat<CR>
 
