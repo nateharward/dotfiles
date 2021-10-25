@@ -461,7 +461,7 @@ let g:airline_theme='base16_flat'
 Plug 'edkolev/tmuxline.vim'
 
 """ Work specific plugins - to keep specifics info out of my public dotfiles
-Plug '~/repos/vim-intel'
+"""# FIXME SLOW Plug '~/repos/vim-intel'
 Plug '~/repos/vim-hdk/'
 
 
