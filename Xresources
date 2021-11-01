@@ -21,22 +21,17 @@ xterm*faceNameDoublesize: DejaVuSansMono Nerd Font
 xterm*faceSize: 15
 xterm*scrollBar: false
 
+! Clipboard settings
 ! Copy and paste with clipboard
 xterm*translations: #override \n\
 	Ctrl Shift <KeyPress> c: copy-selection(CLIPBOARD) \n\
 	Ctrl Shift <KeyPress> v: insert-selection(CLIPBOARD)
+! selectToClipboard will put the PPRIMARY/SELECTION into the CLIPBOARD
+XTerm*selectToClipboard: true
 
 xterm*trimSelection: true
-xterm*visualBell: off
-xterm*vt100.geometry: 256x80
 
-!xterm*faceName: MesloLGSDZ Nerd Font Mono
-!xterm*faceName: ShureTechMono Nerd Font Mono
-!xterm*faceName: SauceCodePro Nerd Font Mono
-!xterm*faceNameDoublesize: SauceCodePro Nerd Font
-!xterm*faceName: MesloLGSDZ Nerd Font Mono:pixelsize=10
-!xterm*faceNameDoublesize: MesloLGSDZ Nerd Font Mono:pixelsize=10
-!xterm*faceName: Bitstream Vera Sans Mono:pixelsize=15
-!xterm*faceNameDoublesize: Bitstream Vera Sans Mono:pixelsize=13
-!xterm*faceName: Meslo LG S DZ for Powerline:pixelsize=15
-!xterm*faceNameDoublesize: Meslo LG S DZ for Powerline:pixelsize=13
+! Bell is anoying
+xterm*visualBell: off
+
+xterm*vt100.geometry: 256x80
