@@ -112,10 +112,10 @@ Plug 'tpope/vim-fugitive'
 """ PERF  " gitk for Vim
 """ PERF  Plug 'gregsexton/gitv', {'on': ['Gitv']}
 """ PERF  
-""" PERF  " A Vim plugin which shows a git diff in the gutter (sign column) and stages/undoes hunks.
-""" PERF  if v:version >= 740
-""" PERF     Plug 'airblade/vim-gitgutter'
-""" PERF  endif
+" A Vim plugin which shows a git diff in the gutter (sign column) and stages/undoes hunks.
+if v:version >= 740
+   Plug 'airblade/vim-gitgutter'
+endif
 """ PERF  
 """ PERF  " A git commit browser in Vim
 """ PERF  " - `:GV` to open commit browser
