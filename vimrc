@@ -289,13 +289,13 @@ let g:SignatureMarkTextHLDynamic=1
 """ PERF  Plug 'vim-scripts/TaskList.vim'
 """ PERF  " Map TaskList to <leader> tl
 """ PERF  nnoremap <silent> <leader>tl :TaskList<CR>
-""" PERF  
-""" PERF  " NERDTree and tabs together in Vim
-""" PERF  "  Plug 'jistr/vim-nerdtree-tabs', { 'on': 'NERDTreeTabsToggle' }
-""" PERF  "Plug 'jistr/vim-nerdtree-tabs'
-""" PERF  " Map NERDTreeToggle to \n
-""" PERF  "nnoremap <leader>n :NERDTreeTabsToggle<CR>
-""" PERF  
+
+" NERDTree and tabs together in Vim
+"  Plug 'jistr/vim-nerdtree-tabs', { 'on': 'NERDTreeTabsToggle' }
+Plug 'jistr/vim-nerdtree-tabs'
+" Map NERDTreeToggle to \n
+nnoremap <leader>n :NERDTreeTabsToggle<CR>
+
 """ PERF  " Vim plugin to list, select and switch between buffers.
 """ PERF  " <leader>b to use, <ctrl>T to open in new tab
 """ PERF  " gb (or <M-b>) and gB (or <M-S-b>) to flip through the MRU buffer stack
@@ -466,11 +466,11 @@ Plug '~/repos/vim-hdk/'
 
 
 """ Run after everything else
-""" PERF  
-""" PERF  "  Adds file type glyphs/icons to popular Vim plugins: NERDTree, vim-airline, Powerline, Unite, vim-startify and more
-""" PERF  "   XXX Run last (or at least after the plugins that is modifies
-""" PERF  "   XXX Requires a patched nerd font https://github.com/ryanoasis/nerd-fonts/tree/master/patched-fonts
-""" PERF  Plug 'ryanoasis/vim-devicons'
+
+"  Adds file type glyphs/icons to popular Vim plugins: NERDTree, vim-airline, Powerline, Unite, vim-startify and more
+"   XXX Run last (or at least after the plugins that is modifies
+"   XXX Requires a patched nerd font https://github.com/ryanoasis/nerd-fonts/tree/master/patched-fonts
+Plug 'ryanoasis/vim-devicons'
 
 call plug#end()
 
@@ -861,7 +861,7 @@ endif
 
 
 " ----------------------------------------------------------------------------
-" Key Mappings
+" Key Mappings (Function Keys)
 " ----------------------------------------------------------------------------
 
 " Function Key Summary !!!!
@@ -877,9 +877,6 @@ endif
 " F10 : Toggle case invariant searching
 " F11 : OUTSIDE - terminal full screen
 " F12 : something weird (TODO look up)
-
-" SPACE - map to colin
-nnoremap <space> :
 
 " F3 - Calulator
 " while editing, hit F3 in the insert mode and type expression to calulate
@@ -915,38 +912,77 @@ inoremap <F10> <C-O>:set smartcase!<CR>
 " F12 - Quickmenu popup
 noremap <silent><F12> :call quickmenu#toggle(0)<cr>
 
-" Use jj for escape ----------------------------------------------------------
-:imap jj <Esc>
 
+" ----------------------------------------------------------------------------
+" Key Mappings (Remapping from default)
+" ----------------------------------------------------------------------------
+
+" SPACE - map to colin
+" Previous Mapping = (SPACE) move right one character 
+nnoremap <space> :
+
+" K
+" bind K to grep word under cursor
+" Previous Mapping = UNBOUND
+nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
+
+" Q
+" Apply Macros with Q ----------------------------------------------------------
+" This mapping makes macros even easier to remember: hit qq to record, q to stop
+" recording, and Q to apply. This mapping also allows you to play macros across
+" a visual selection with Q.
+" Previous Mapping = leave visual mode (go into "ex" mode)
+nnoremap Q @q
+vnoremap Q :norm @q<cr>
+
+" ^L
 " Use <C-L> to clear the highlighting of :set hlsearch.
+" Previous Mapping = refresh screen 
 if maparg('<C-L>', 'n') ==# ''
   nnoremap <silent> <C-L> :nohlsearch<CR><C-L>
 endif
 
-" Make * or # work with visually selected text in addition to its normal function
-" Search for selected text, forwards or backwards.
-vnoremap <silent> * :<C-U>
-         \let old_reg=getreg('"')<Bar>let old_regtype=getregtype('"')<CR>
-         \gvy/<C-R><C-R>=substitute(
-         \escape(@", '/\.*$^~['), '\_s\+', '\\_s\\+', 'g')<CR><CR>
-         \gV:call setreg('"', old_reg, old_regtype)<CR>
-vnoremap <silent> # :<C-U>
-         \let old_reg=getreg('"')<Bar>let old_regtype=getregtype('"')<CR>
-         \gvy?<C-R><C-R>=substitute(
-         \escape(@", '?\.*$^~['), '\_s\+', '\\_s\\+', 'g')<CR><CR>
-         \gV:call setreg('"', old_reg, old_regtype)<CR>
+" ----------------------------------------------------------------------------
+" Key Mappings (Doubles)
+" ----------------------------------------------------------------------------
 
-" bind K to grep word under cursor
-nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
+" Use jj for escape ----------------------------------------------------------
+:imap jj <Esc>
 
-" use pt with unite ----------------------------------------------------------
-nnoremap <silent> ,g :<C-u>Unite grep:. -buffer-name=search-buffer<CR>
-if executable('pt')
-   let g:unite_source_grep_command = 'pt'
-   let g:unite_source_grep_default_opts = '--nogroup --nocolor'
-   let g:unite_source_grep_recursive_opt = ''
-   let g:unite_source_grep_encoding = 'utf-8'
-endif
+" Clone Paragraph with cp ------------------------------------------------------
+" This will copy the paragraph your cursor is on then paste a copy of it just
+" below. This is great when you're about to create a block of code that will be
+" similar, but not different enough to abstract (e.g. it blocks in rspec).
+noremap cp yap<S-}>p
+
+" ----------------------------------------------------------------------------
+" Key Mappings (Leader)
+" ----------------------------------------------------------------------------
+
+" Quit Files with Leader + q ---------------------------------------------------
+" Quickly close a file with <leader>q.
+noremap <leader>q :q<cr>
+
+" \g
+" bind g to run shell command on text
+noremap <leader>g !!$SHELL<CR>
+inoremap <leader>g <C-c>!!$SHELL<CR>
+
+" Yank / copy inner word to external clipboard with leader + space ---------------------------------------------------
+noremap <leader><space> viw"*y
+noremap <return> yiw
+"noremap <leader><return> viw"*p doesn't quite work
+
+" Toggle save workspace with Leader + w
+" Dependant on plugin thaerkh/vim-workspace
+nnoremap <leader>w :ToggleWorkspace<CR>
+
+" Save File with Leader + s ----------------------------------------------------
+" If you're like me and you like to constantly save files, this one is nice.
+" Just hit <leader>s. The second line makes this work in insert mode too, saving
+" you even more effort.
+nnoremap <leader>s :w<cr>
+inoremap <leader>s <C-c>:w<cr>
 
 " Set \[ and \] to yank stack mappings
 nmap <leader>[ <Plug>yankstack_substitute_older_paste
@@ -966,20 +1002,6 @@ nmap <leader>af :Autoformat<CR>
 " Map to function to switch to header file by the same name
 nmap <silent> <leader>sh :call ToggleHeader()<CR>
 
-" Shift + Direction to Move Tabs ----------------------
-nnoremap <silent> <S-h> :execute 'silent! tabmove ' . (tabpagenr()-2)<CR>
-nnoremap <silent> <S-l> :execute 'silent! tabmove ' . (tabpagenr()+1)<CR>
-
-" Ctrl + Direction to Change Tabs ---------------------------------------------
-" Who has time to type gt and gT? Not me. Using shift and a direction to change
-" tabs is a great alternative.
-nnoremap <C-h> :tabprevious<CR>
-nnoremap <C-l> :tabnext<CR>
-
-" Control + n, p for next and prev -------------------------------------------
-noremap <C-n> :next<CR>
-noremap <C-p> :prev<CR>
-
 " System paste ---------------------------------------------------------------
 noremap <leader>p "+gP
 " System copy
@@ -997,9 +1019,6 @@ nnoremap <leader>sb :source ~/.vimrc_background<CR>
 " Set working directory
 nnoremap <leader>. :lcd %:p:h<CR>
 
-" TODO make a map for this replacement from fs to us
-" %s/\(\d\+\)\(\d\d\d\)\d\d\d\d\d\d fs/\1.\2 us/g
-
 " Filter to search result LEADER + /
 " :redir @a         redirect output to register a
 " :g//              repeat last global command
@@ -1007,12 +1026,6 @@ nnoremap <leader>. :lcd %:p:h<CR>
 " :new              create new window
 " :put! a           paste register a into new window
 nnoremap <silent> <leader>/ :redir @a<CR>:g//<CR>:redir END<CR>:tabnew<CR>:put! a<CR>
-
-" Clone Paragraph with cp ------------------------------------------------------
-" This will copy the paragraph your cursor is on then paste a copy of it just
-" below. This is great when you're about to create a block of code that will be
-" similar, but not different enough to abstract (e.g. it blocks in rspec).
-noremap cp yap<S-}>p
 
 " Align Current Paragraph with Leader + a --------------------------------------
 " Quickly align your current paragraph with this command. Sometimes this can
@@ -1023,12 +1036,68 @@ noremap <leader>a =ip
 "Avoid typing :set paste and :set nopaste by setting a paste toggle command.
 set pastetoggle=<leader>z
 
-" Apply Macros with Q ----------------------------------------------------------
-" This mapping makes macros even easier to remember: hit qq to record, q to stop
-" recording, and Q to apply. This mapping also allows you to play macros across
-" a visual selection with Q.
-nnoremap Q @q
-vnoremap Q :norm @q<cr>
+" get the file path Leader + f ------------------------------------------------
+" <leader>f. Get the path. Next step, figure out how to save it in
+" you even more effort.
+" Convert slashes to backslashes for Windows.
+if has('win32')
+   nmap <leader>f :let @*=substitute(expand("%:p"), "/", "\\", "g")<CR>
+else
+   nmap <leader>f :let @*=expand("%:p")<CR>:let @+=expand("%:p")<CR>
+endif
+
+" copy all - everything in the file
+" TODO find a mapping other than leader-ca so that it doesn't slow down leader-c
+nnoremap <leader>caa :%y+<CRa >
+
+
+" Paste the timestamp / date
+nnoremap <leader>tt "=strftime("%Yww%V.%u_%k_%M_%S")<CR>P
+inoremap <leader>tt <C-R>=strftime("%Yww%V.%u_%k_%M_%S")<CR>
+
+" ----------------------------------------------------------------------------
+" Key Mappings (Other)
+" ----------------------------------------------------------------------------
+
+" Make * or # work with visually selected text in addition to its normal function
+" Search for selected text, forwards or backwards.
+vnoremap <silent> * :<C-U>
+         \let old_reg=getreg('"')<Bar>let old_regtype=getregtype('"')<CR>
+         \gvy/<C-R><C-R>=substitute(
+         \escape(@", '/\.*$^~['), '\_s\+', '\\_s\\+', 'g')<CR><CR>
+         \gV:call setreg('"', old_reg, old_regtype)<CR>
+vnoremap <silent> # :<C-U>
+         \let old_reg=getreg('"')<Bar>let old_regtype=getregtype('"')<CR>
+         \gvy?<C-R><C-R>=substitute(
+         \escape(@", '?\.*$^~['), '\_s\+', '\\_s\\+', 'g')<CR><CR>
+         \gV:call setreg('"', old_reg, old_regtype)<CR>
+
+" use pt with unite ----------------------------------------------------------
+nnoremap <silent> ,g :<C-u>Unite grep:. -buffer-name=search-buffer<CR>
+if executable('pt')
+   let g:unite_source_grep_command = 'pt'
+   let g:unite_source_grep_default_opts = '--nogroup --nocolor'
+   let g:unite_source_grep_recursive_opt = ''
+   let g:unite_source_grep_encoding = 'utf-8'
+endif
+
+" Shift + Direction to Move Tabs ----------------------
+nnoremap <silent> <S-h> :execute 'silent! tabmove ' . (tabpagenr()-2)<CR>
+nnoremap <silent> <S-l> :execute 'silent! tabmove ' . (tabpagenr()+1)<CR>
+
+" Ctrl + Direction to Change Tabs ---------------------------------------------
+" Who has time to type gt and gT? Not me. Using shift and a direction to change
+" tabs is a great alternative.
+nnoremap <C-h> :tabprevious<CR>
+nnoremap <C-l> :tabnext<CR>
+
+" Control + n, p for next and prev -------------------------------------------
+noremap <C-n> :next<CR>
+noremap <C-p> :prev<CR>
+
+" TODO make a map for this replacement from fs to us
+" %s/\(\d\+\)\(\d\d\d\)\d\d\d\d\d\d fs/\1.\2 us/g
+
 
 " Control + Direction to Change Panes ------------------------------------------
 " Same thing goes for changing panes, but these use control . Skip that pesky w
@@ -1043,26 +1112,6 @@ noremap <Up> <C-w>k
 noremap <Down> <C-w>j
 noremap <Left> <C-w>h
 noremap <Right> <C-w>l
-
-" Quit Files with Leader + q ---------------------------------------------------
-" Quickly close a file with <leader>q.
-noremap <leader>q :q<cr>
-
-" Yank / copy inner word to external clipboard with leader + space ---------------------------------------------------
-noremap <leader><space> viw"*y
-noremap <return> yiw
-"noremap <leader><return> viw"*p doesn't quite work
-
-" Toggle save workspace with Leader + w
-" Dependant on plugin thaerkh/vim-workspace
-nnoremap <leader>w :ToggleWorkspace<CR>
-
-" Save File with Leader + s ----------------------------------------------------
-" If you're like me and you like to constantly save files, this one is nice.
-" Just hit <leader>s. The second line makes this work in insert mode too, saving
-" you even more effort.
-nnoremap <leader>s :w<cr>
-inoremap <leader>s <C-c>:w<cr>
 
 " Bubbling - Move lines up and down
 " Requires vim-impared mappings since I'm mapping to mappings
@@ -1084,20 +1133,6 @@ vnoremap gf <C-W>gf
 " [note] Ctrl-W+f still will do the same with a horizontl split
 nnoremap <C-W><C-F> <C-W>vgf
 
-" get the file path Leader + f ------------------------------------------------
-" <leader>f. Get the path. Next step, figure out how to save it in
-" you even more effort.
-" Convert slashes to backslashes for Windows.
-if has('win32')
-   nmap <leader>f :let @*=substitute(expand("%:p"), "/", "\\", "g")<CR>
-else
-   nmap <leader>f :let @*=expand("%:p")<CR>:let @+=expand("%:p")<CR>
-endif
-
-" copy all - everything in the file
-" TODO find a mapping other than leader-ca so that it doesn't slow down leader-c
-nnoremap <leader>caa :%y+<CRa >
-
 " Text search object
 " It allows me to use the following search-and-replace flow:
 " * I search things usual way using /something
@@ -1113,10 +1148,6 @@ omap s :normal vs<CR>
 vnoremap <silent> y y`]
 vnoremap <silent> p p`]
 nnoremap <silent> p p`]
-
-" Paste the timestamp / date
-nnoremap <leader>tt "=strftime("%Yww%V.%u_%k_%M_%S")<CR>P
-inoremap <leader>tt <C-R>=strftime("%Yww%V.%u_%k_%M_%S")<CR>
 
 "
 " Prevent replacing paste buffer on paste:
