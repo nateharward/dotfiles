@@ -314,9 +314,13 @@ nnoremap <leader>n :NERDTreeTabsToggle<CR>
 """
 
 """ Usability
-""" PERF  " unimpaired.vim: pairs of handy bracket mappings
-""" PERF  Plug 'tpope/vim-unimpaired'
-""" PERF  
+" unimpaired.vim: pairs of handy bracket mappings
+Plug 'tpope/vim-unimpaired'
+
+" surround.vim: Delete/change/add parentheses/quotes/XML-tags/much more with ease
+" example: visual something, then press S) to surround it in parentheses
+Plug 'tpope/vim-surround'
+
 """ PERF  " ansi escape sequences concealed, but highlighted as specified (conceal)
 """ PERF  " type :AnsiEsc
 """ PERF  Plug 'vim-scripts/AnsiEsc.vim'
@@ -357,13 +361,13 @@ nnoremap <leader>n :NERDTreeTabsToggle<CR>
 "Toggles the comment state of the selected line(s). If the topmost selected line is commented, all selected lines are uncommented and vice versa.
 "  [count]<leader>c<space>
 
-""" PERF  " commentary.vim: comment stuff out
-""" PERF  " Use gcc to comment out a line (takes a count),
-""" PERF  " gc to comment out the target of a motion (for example, gcap to comment out a paragraph),
-""" PERF  " gc in visual mode to comment out the selection, and
-""" PERF  " gc in operator pending mode to target a comment.
-""" PERF  Plug 'tpope/vim-commentary'
-""" PERF  
+" commentary.vim: comment stuff out
+" Use gcc to comment out a line (takes a count),
+" gc to comment out the target of a motion (for example, gcap to comment out a paragraph),
+" gc in visual mode to comment out the selection, and
+" gc in operator pending mode to target a comment.
+Plug 'tpope/vim-commentary'
+
 """ PERF  " Vim script for text filtering and alignment
 """ PERF  " * :Tab /:     lines up colon
 """ PERF  " * :Tab/|      lines up pipe-delimited tables
@@ -399,11 +403,11 @@ Plug 'Chiel92/vim-autoformat'
 
 """ PERF  " Miscellaneous auto-load Vim scripts http://peterodding.com/code/vim/misc/
 """ PERF  Plug 'xolox/vim-misc'
-""" PERF  
-""" PERF  " repeat.vim: enable repeating supported plugin maps with '.'
-""" PERF  " to make it work with my map functions add silent! call repeat#set("\<Plug>MyWonderfulMap", v:count) at the end
-""" PERF  Plug 'tpope/vim-repeat'
-""" PERF  
+
+" repeat.vim: enable repeating supported plugin maps with '.'
+" to make it work with my map functions add silent! call repeat#set("\<Plug>MyWonderfulMap", v:count) at the end
+Plug 'tpope/vim-repeat'
+
 """ PERF  " Improved integration between Vim and its environment (fullscreen, open URL, background command execution) http://peterodding.com/code/vim/shell/
 """ PERF  " Plug 'xolox/vim-shell'
 """ PERF  
