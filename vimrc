@@ -620,8 +620,17 @@ else
 
    "   colorscheme default
 
+   " 24-bit on SLES12
+   " TODO read sles12 env var to set
+   if exists('+termguicolors')
+     " let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+     " let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+     set termguicolors
+   endif
+
    if $TERM !~# 'putty-256color'
-      let base16colorspace=256
+      " TODO read sles11 env var to set
+      "let base16colorspace=256
       if !empty($BASE16_THEME)
          let base_scheme =  'base16-' . $BASE16_THEME
          exec 'colorscheme ' . base_scheme
@@ -766,8 +775,7 @@ endif
 if executable('ag')
    let g:ackprg = 'ag --vimgrep' " will report every match on the line
 endif
-
-" unnless we have pt, use that instead of ag or ack
+" unless we have pt, use that instead of ag or ack
 if executable('pt')
    let g:ackprg = 'pt --nogroup --nocolor --column'
 endif
