@@ -237,9 +237,9 @@ nnoremap <leader>n :NERDTreeToggle<CR>
 """ PERF  " 🐉  Dark powered asynchronous unite all interfaces for Neovim/Vim8
 """ PERF  Plug 'Shougo/denite.nvim'
 
-""" PERF  " dispatch.vim: Asynchronous build and test dispatcher
-""" PERF  Plug 'tpope/vim-dispatch'
-""" PERF  
+" dispatch.vim: Asynchronous build and test dispatcher
+Plug 'tpope/vim-dispatch'
+
 """ PERF  " A nice customizable popup menu for vim
 """ PERF  Plug 'skywind3000/quickmenu.vim'
 """ PERF  
@@ -315,6 +315,9 @@ nnoremap <leader>n :NERDTreeTabsToggle<CR>
 
 """ Usability
 " unimpaired.vim: pairs of handy bracket mappings
+" ex: Quicklist: ]q->cnext, Buffer List: ]b->bnext, Location List: ]l->lnext
+"     File: ]a->next, File-in-dir: ]f->cnewer, Git conflict marker: ]n - try d]n
+"     Add line: ]<Space>, enable cursor column: [ou, Virtual edit: [ov 
 Plug 'tpope/vim-unimpaired'
 
 " surround.vim: Delete/change/add parentheses/quotes/XML-tags/much more with ease
