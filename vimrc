@@ -227,10 +227,10 @@ nnoremap <leader>n :NERDTreeToggle<CR>
 """ PERF  
 """ PERF  " Vim plugin for the Perl module / CLI script 'ack'
 """ PERF  Plug 'mileszs/ack.vim'
-""" PERF  
-""" PERF  " platinum searcher
-""" PERF  Plug 'nazo/pt.vim'
-""" PERF  
+
+" platinum searcher
+Plug 'nazo/pt.vim'
+
 """ PERF  " Fuzzy file, buffer, mru, tag, etc finder.
 """ PERF  Plug 'ctrlpvim/ctrlp.vim'
 """ PERF  
@@ -766,22 +766,21 @@ let g:workspace_autosave_untrailspaces = 0
 "FIXME     let g:workspace_session_name = g:tmux_window_name . '-session.vim'
 "FIXME  endif
 
+" " use ag instead of ack for :Ack command
+" if executable('ag')
+"    let g:ackprg = 'ag --vimgrep' " will report every match on the line
+" endif
+
 " Replace grep with pt
 if executable('pt')
    " Use pt over grep
    set grepprg=pt\ --nogroup\ --nocolor
+   "let &grepprg="pt --nogroup --nocolor --ignore=scripts/csr --ignore=verif/coverage/cfg --ignore=verif/tb/firmware"
    " Use pt in CtrlP for listing files. Lightning fast and respects .gitignore
    let g:ctrlp_user_command = 'pt %s -l --nocolor -g ""'
-endif
-
-" use ag instead of ack for :Ack command
-if executable('ag')
-   let g:ackprg = 'ag --vimgrep' " will report every match on the line
-endif
-" unless we have pt, use that instead of ag or ack
-if executable('pt')
    let g:ackprg = 'pt --nogroup --nocolor --column'
 endif
+
 
 " Quick Menu -----------------------------------------
 if exists('g:quickmenu_max_width')
@@ -939,7 +938,9 @@ nnoremap <space> :
 " K
 " bind K to grep word under cursor
 " Previous Mapping = UNBOUND
-nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
+"nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
+"nnoremap K :Pt "\b<C-R><C-W>\b"<CR>
+nnoremap K :Pt "<C-R><C-W>"<CR>
 
 " Q
 " Apply Macros with Q ----------------------------------------------------------
