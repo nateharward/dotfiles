@@ -144,16 +144,16 @@ endif
 """ Languages plugins and linters
 """ PERF  " Asynchronous Lint Engine
 """ PERF  Plug 'w0rp/ale'
-""" PERF  
-""" PERF  " Syntax highlighting for SystemRDL files
-""" PERF  Plug 'vim-scripts/systemrdl.vim'
-""" PERF  
-""" PERF  " Additional Vim syntax highlighting for C++ (including C++11/14)
-""" PERF  Plug 'octol/vim-cpp-enhanced-highlight'
-""" PERF  
-""" PERF  " Support for Perl 5 and Perl 6 in Vim
-""" PERF  Plug 'vim-perl/vim-perl', { 'for': 'perl', 'do': 'make clean carp dancer highlight-all-pragmas moose test-more try-tiny' }
-""" PERF  
+
+" Syntax highlighting for SystemRDL files
+Plug 'vim-scripts/systemrdl.vim'
+
+" Additional Vim syntax highlighting for C++ (including C++11/14)
+Plug 'octol/vim-cpp-enhanced-highlight'
+
+" Support for Perl 5 and Perl 6 in Vim
+Plug 'vim-perl/vim-perl', { 'for': 'perl', 'do': 'make clean carp dancer highlight-all-pragmas moose test-more try-tiny' }
+
 """ PERF  " Reason language
 """ PERF  if v:version > 800
 """ PERF     Plug 'reasonml-editor/vim-reason-plus'
@@ -338,9 +338,9 @@ Plug 'tpope/vim-surround'
 """ PERF  
 """ PERF  " Txtfmt (The Vim Highlighter) : Rich text highlighting in Vim! (colors, underline, bold, italic, etc...)
 """ PERF  Plug 'bpstahlman/txtfmt'
-""" PERF  
-""" PERF  " Vim plugin that allows you to visually select increasingly larger regions of text using the same key combination.
-""" PERF  Plug 'terryma/vim-expand-region'
+
+" Vim plugin that allows you to visually select increasingly larger regions of text using the same key combination.
+Plug 'terryma/vim-expand-region'
 
 " comment lines in a program
 " XXX commented out while I try other plugin
