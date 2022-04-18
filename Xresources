@@ -2,7 +2,8 @@
 ! TODO find a good way to have a per-machine font size setting
 !   2160p screens vs 1080p
 !   TODO scrollbars and visual bells
-
+!
+xterm*loginShell: true
 xterm*ttyModes: intr ^c erase ^h weras ^w kill ^u
 xterm*utf8: true
 xterm*locale: true
@@ -26,8 +27,9 @@ xterm*scrollBar: false
 xterm*translations: #override \n\
 	Ctrl Shift <KeyPress> c: copy-selection(CLIPBOARD) \n\
 	Ctrl Shift <KeyPress> v: insert-selection(CLIPBOARD)
+
 ! selectToClipboard will put the PPRIMARY/SELECTION into the CLIPBOARD
-XTerm*selectToClipboard: true
+xterm*selectToClipboard: true
 
 xterm*trimSelection: true
 
@@ -35,3 +37,21 @@ xterm*trimSelection: true
 xterm*visualBell: off
 
 xterm*vt100.geometry: 256x80
+
+! Additional font sizes in ctrl-rclick window
+xterm*faceSize1: 10
+xterm*faceSize2: 11
+xterm*faceSize3: 12
+xterm*faceSize4: 13
+xterm*faceSize5: 15
+xterm*faceSize6: 18
+xterm*faceSize7: 20 
+xterm*font1: DejaVuSansMonoNerdFontCM-Book-normal-10
+xterm*font2: DejaVuSansMonoNerdFontCM-Book-normal-11
+xterm*font3: DejaVuSansMonoNerdFontCM-Book-normal-12
+xterm*font4: DejaVuSansMonoNerdFontCM-Book-normal-13
+xterm*font5: DejaVuSansMonoNerdFontCM-Book-normal-15
+xterm*font6: DejaVuSansMonoNerdFontCM-Book-normal-18
+xterm*font7: DejaVuSansMonoNerdFontCM-Book-normal-20 
+
+! refer to the xterm man page for other settings

@@ -17,26 +17,29 @@ export EDITOR="vim -p"
 export DOTFILES=$HOME/repos/dotfiles
 
 BASE16_SHELL=$DOTFILES/base16-shell/
-[ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
+[ -n "$PS1" ] && [[ $TERM_PROGRAM != 'vscode' ]] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
 
 if   [ -e /usr/share/terminfo/x/xterm-24bit ]; then
-        export TERM='xterm-24bit'
+   export TERM='xterm-24bit'
 elif [ -e /usr/share/terminfo/x/xterm-256color ]; then
-        export TERM='xterm-256color'
+   export TERM='xterm-256color'
 else
-        export TERM='xterm-color'
+   export TERM='xterm-color'
 fi
 
-base16_flat
+if [[ $TERM_PROGRAM != 'vscode' ]]; then # leave vscode to its own theme
+   base16_flat
+fi
+
 set -o vi
 bind '"jj":vi-movement-mode'
 
 # WSL / Windows Bash specific stuffs
 if grep -qE "(Microsoft|WSL)" /proc/version &> /dev/null ; then
-  export DISPLAY=:0
-  xrdb $HOME/.Xresources
-#else
-#  echo "Anything else"
+   export DISPLAY=:0
+   xrdb $HOME/.Xresources
+   #else
+   #  echo "Anything else"
 fi
 
 # I never need XOFF (freezes vim)
@@ -56,7 +59,7 @@ elif [[ $NNTPSERVER =~ ^.*intel.*$ ]]; then # on work machine
 elif [ -z ${EC_ZONE+x} ]; then # on work machine
    export ONWORKMACHINE=1
 else
-   PATH="$DOTFILES/brew/bin:$PATH"
+   PATH="$DOTFILES/.linuxbrew/bin:$PATH"
    export MANPATH="$(brew --prefix)/share/man:$MANPATH"
    export INFOPATH="$(brew --prefix)/share/info:$INFOPATH"
 fi
@@ -70,11 +73,11 @@ export THEME_CHECK_SUDO=FALSE
 source $HOME/.bashrc.bashit
 
 if [ -r $HOME/.aliases-bash-personal ]; then
-  source $HOME/.aliases-bash-personal
+   source $HOME/.aliases-bash-personal
 fi
 
 if [ -r $HOME/.aliases-bash-work ]; then
-  source $HOME/.aliases-bash-work
+   source $HOME/.aliases-bash-work
 fi
 
 # Load machine specific files
