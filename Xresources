@@ -23,15 +23,22 @@ xterm*faceSize: 15
 xterm*scrollBar: false
 
 ! Clipboard settings
-! Copy and paste with clipboard
-xterm*translations: #override \n\
-	Ctrl Shift <KeyPress> c: copy-selection(CLIPBOARD) \n\
-	Ctrl Shift <KeyPress> v: insert-selection(CLIPBOARD)
-
 ! selectToClipboard will put the PPRIMARY/SELECTION into the CLIPBOARD
 xterm*selectToClipboard: true
-
 xterm*trimSelection: true
+
+! OVERRIDES
+!   Copy and paste with clipboard
+!   use ctrl + and ctrl - to change font size
+xterm*vt100.translations: #override \n\
+  Ctrl Shift <KeyPress> c: copy-selection(PRIMARY, CLIPBOARD, CUT_BUFFER0) \n\
+  Ctrl Shift <KeyPress> v: insert-selection(CLIPBOARD) \n\
+                 <Btn1Up>: select-end(PRIMARY, CLIPBOARD, CUT_BUFFER0) \n\
+         Ctrl <Key> minus: smaller-vt-font() \n\
+          Ctrl <Key> plus: larger-vt-font()
+
+! select whole filepaths and urls
+xterm*charClass: 33:48,35:48,37-38:48,43-47:48,58:48,61:48,63-64:48,95:48,126:48
 
 ! Bell is anoying
 xterm*visualBell: off
@@ -39,19 +46,19 @@ xterm*visualBell: off
 xterm*vt100.geometry: 256x80
 
 ! Additional font sizes in ctrl-rclick window
-xterm*faceSize1: 10
-xterm*faceSize2: 11
-xterm*faceSize3: 12
-xterm*faceSize4: 13
-xterm*faceSize5: 15
-xterm*faceSize6: 18
-xterm*faceSize7: 20 
-xterm*font1: DejaVuSansMonoNerdFontCM-Book-normal-10
-xterm*font2: DejaVuSansMonoNerdFontCM-Book-normal-11
-xterm*font3: DejaVuSansMonoNerdFontCM-Book-normal-12
-xterm*font4: DejaVuSansMonoNerdFontCM-Book-normal-13
-xterm*font5: DejaVuSansMonoNerdFontCM-Book-normal-15
-xterm*font6: DejaVuSansMonoNerdFontCM-Book-normal-18
-xterm*font7: DejaVuSansMonoNerdFontCM-Book-normal-20 
+xterm*faceSize1: 11
+xterm*faceSize2: 13
+xterm*faceSize3: 14
+xterm*faceSize4: 15
+xterm*faceSize5: 16
+xterm*faceSize6: 17
+xterm*faceSize7: 19 
+xterm*font1: DejaVuSansMonoNerdFontCM-Book-normal-11
+xterm*font2: DejaVuSansMonoNerdFontCM-Book-normal-13
+xterm*font3: DejaVuSansMonoNerdFontCM-Book-normal-14
+xterm*font4: DejaVuSansMonoNerdFontCM-Book-normal-15
+xterm*font5: DejaVuSansMonoNerdFontCM-Book-normal-16
+xterm*font6: DejaVuSansMonoNerdFontCM-Book-normal-17
+xterm*font7: DejaVuSansMonoNerdFontCM-Book-normal-19 
 
 ! refer to the xterm man page for other settings
