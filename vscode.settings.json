@@ -1,0 +1,29 @@
+{
+    "editor.fontSize": 20,
+    "editor.tabSize": 3,
+    "editor.wordWrap": "on",
+    "editor.renderControlCharacters": true,
+    "editor.fontFamily": "DejaVuSansMono NF",
+    "[systemverilog]": {
+        "editor.quickSuggestions": false,
+        "editor.formatOnType": true
+    },
+    "files.associations": {
+        "*.mmd": "markdown"
+    },
+    "workbench.colorTheme": "Noctis Lux",
+    "workbench.view.alwaysShowHeaderActions": true,
+    "security.workspace.trust.untrustedFiles": "open",
+    "vim.easymotion": true,
+    "vim.vimrc.enable": true,
+    "vim.hlsearch": true,
+    "editor.renderWhitespace": "all",
+    "remote.SSH.defaultExtensions": [
+        "amiq.dvt",
+        "vscodevim.vim"
+    ],
+    "remote.downloadExtensionsLocally": true,
+    "DVT.contentFilters.enable": true,
+    "DVT.buildAutomatically.enable": false,
+    "window.zoomLevel": 1
+}
