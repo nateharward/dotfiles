@@ -1,0 +1,224 @@
+# Nathan Harward
+# Personal aliases for use on personal machines as well as my work machines
+# Permitted for use by anyone anywhere. I assume no liability
+# Aliases in this file .aliases-personal are overriden by 
+#   machine specific aliases ".aliases-work"
+# shell=bash
+
+# Handy
+alias today='date +"%Yww%V.%u"'
+alias now='date +"%Yww%V.%u_%k_%M_%S"'
+nameme() { echo -ne "\033]0;$1\007"; }
+
+# VIM
+alias vi='vim';
+alias vim_min='vim -u ~/.vimrc_minimal';
+alias vim_norc='vim -Nu NORC';
+alias e='vim_min -p';
+alias pastevim='xclip -o | gvim - -R';
+alias vimnotes='vim notes';
+alias v='vim -p';
+alias vimtodo='vim todo';
+wvim() { vim $(which -p $1); }
+
+# GIT Basics
+alias   Gclone='git clone -b $MASTER_BRANCH $TOT'         
+alias    Gpull='git pull origin $MASTER_BRANCH'          
+alias  Gpullrb='git pull --rebase origin $MASTER_BRANCH'          
+alias     Gadd='git add';
+alias     Gcam='git commit -am';
+alias      lsf='git ls-files | grep ';
+lsv()  { vim -p $(git ls-files | grep $1); }
+lsfv() { git ls-files | grep $1 | vim -R - ; }
+
+# GIT LOG
+alias                 Glog='git log';
+alias        Glog_one_line='git log --decorate --oneline';
+alias            Glognotes='git log --show-notes='\''*'\''';
+alias          Gtreevisual='git log --pretty=oneline --graph --decorate --all';
+alias                Gfile='git log --follow -p -- ';
+alias              greflog='git reflog';
+alias         Glogunpushed='git lg --branches --not --remotes';
+alias                  Gme='git lg --author="harward"';
+alias              Gfollow='git log -p -M --follow --stat'
+alias           Glogorigin='git lg origin/$MASTER_BRANCH HEAD';
+alias          Glogcommits='git log --no-merges --raw $MASTER_BRANCH ^origin/$MASTER_BRANCH';
+alias      Glognotinorigin='git lg origin/$MASTER_BRANCH..HEAD';
+alias     GHlognotinorigin='git lg origin/$MASTER_BRANCH..HEAD | aha > changes_files.html';
+alias     GVlognotinorigin='git log --graph --pretty=format:'"'%h - %d %s (%cr) <%an>'"'  origin/$MASTER_BRANCH..HEAD | gvim -R - -c '"'set filetype=git'"''
+alias        Glognotinbase='git lg base..HEAD';
+alias       Glognotinother='git lg $OTHER_BRANCH..HEAD';
+alias       GHlognotinbase='git lg base..HEAD | aha > changes_files.html';
+alias      GHlognotinother='git lg $OTHER_BRANCH..HEAD | aha > changes_files.html';
+alias       GVlognotinbase='git log --graph --pretty=format:'"'%h - %d %s (%cr) <%an>'"'  base..HEAD | gvim -R - -c '"'set filetype=git'"''
+alias      GVlognotinother='git log --graph --pretty=format:'"'%h - %d %s (%cr) <%an>'"'  $OTHER_BRANCH..HEAD | gvim -R - -c '"'set filetype=git'"''
+
+# GIT DIFF
+alias       Gdiforigin='git diff origin/$MASTER_BRANCH HEAD'
+alias         Gdifbase='git diff base HEAD'
+alias         Gdifhead='git diff HEAD'
+alias        Gdifother='git diff $OTHER_BRANCH HEAD'
+alias            Gdiff='git diff'
+alias       Gdifcommon='git diff origin/$MASTER_BRANCH...HEAD'
+alias      Gconflicted='git diff --name-only | uniq | xargs $EDITOR';
+alias Gaddnowhitespace='git diff --ignore-all-space | git apply --cached';
+alias Gdifnowhitespace='git diff --ignore-all-space';
+alias        Gdif_html='git diff -w --color=always | aha > changes.html'
+#alias      Gdiforigin='git diff origin/$MASTER_BRANCH HEAD --color=always'
+alias  Gdiforigin_html='git diff origin/$MASTER_BRANCH HEAD -w --color=always | aha > changes.html'
+alias    Gdifbase_html='git diff base HEAD -w --color=always | aha > changes.html'
+alias    Gdifhead_html='git diff HEAD -w --color=always | aha > changes.html'
+alias   Gdifother_html='git diff $OTHER_BRANCH HEAD -w --color=always | aha > changes.html'
+alias  Gdifnotinorigin='git diff origin/$MASTER_BRANCH..HEAD';
+alias    Gdifnotinbase='git diff base..HEAD';
+alias   Gdifnotinother='git diff $OTHER_BRANCH..HEAD';
+alias  Gdiforiginfiles='git diff origin/$MASTER_BRANCH..HEAD --name-only --relative';
+alias  Gdifbaseinfiles='git diff base..HEAD --name-only --relative';
+alias Gdifotherinfiles='git diff $OTHER_BRANCH..HEAD --name-only --relative';
+alias      VGdiforigin='vim -p `git diff origin/$MASTER_BRANCH HEAD --name-only --relative`';
+alias        VGdifbase='vim -p `git diff base HEAD --name-only --relative`'
+alias        VGdifhead='vim -p `git diff HEAD --name-only --relative`'
+alias       VGdifother='vim -p `git diff $OTHER_BRANCH HEAD --name-only --relative`'
+alias VGdifnotinorigin='vim -p `git diff origin/$MASTER_BRANCH..$MASTER_BRANCH --name-only --relative`';
+alias            VGdif='vim -p `git diff --name-only --relative`';
+
+# GIT OTHER
+Gpullboth() { git pull origin $MASTER_BRANCH && git checkout base && git merge origin/$MASTER_BRANCH && git checkout $MASTER_BRANCH; }
+alias            Gblame='git blame -w -M';
+alias          Gunstage='git reset HEAD my-file-name';
+alias         showfiles='git show --pretty="format:" --name-only';
+alias      Gwhatchanged='git whatchanged --since='\''2 weeks ago'\''';
+alias Gchangelastcommit='git commit --amend --no-edit';
+alias             Ghash='git rev-parse HEAD';
+alias           Gstatus='git gc --aggressive; git status';
+alias       Gabortmerge='git merge --abort';
+alias    Gbackuntracked='git ls-files --others -i --exclude-standard | xargs zip untracked.zip';
+alias      Gbackchanged='git diff origin/$MASTER_BRANCH HEAD --name-only | xargs zip changed.zip';
+alias          Gignored='git check-ignore *';
+alias        Gstatshort='git status --short --branch';
+alias         Gbranches='git branch -a';
+alias          Galiases='git config -l | grep alias | sed '\''s/^alias\.//g'\''';
+alias             Ggrep='git grep --heading --line-number';
+alias         Ctags_git='ctags --exclude=.dvt --exclude=.git --exclude=doc --exclude=.githooks -R';
+alias         Gcleanall='git clean -f -d';
+alias     Gcloneshallow='git clone --depth 1';
+alias    Gcommon_origin='git merge-base origin/$MASTER_BRANCH HEAD'
+alias      Gcommon_base='git merge-base base HEAD'
+alias     Gcommon_other='git merge-base $OTHER_BRANCH HEAD'
+alias            Gtrack='git checkout -b $MASTER_BRANCH --track origin/$MASTER_BRANCH'
+alias  showfiles_origin='git diff origin/$MASTER_BRANCH HEAD --pretty="format:" --name-only';
+alias            Gpatch='git format-patch origin/$MASTER_BRANCH --stdout'
+alias Gremovealltracked='git ls-tree --name-only -d -r -z HEAD | sort -rz | xargs -0 rmdir'
+# To stage changes that are not just whitespace changes, you can do:
+alias Gaddnotwhitespace='git diff -U0 -w --no-color | git apply --cached --ignore-whitespace --unidiff-zero -'
+Gshow_html() { git show -w --color=always $1 | aha > show.html; }
+VGshow()     { vim -p $(git show --pretty="" --name-only --relative $1); }
+VGshow2()    { vim -p $(git show --pretty="format:" --name-only --relative $1 ); }
+
+# GREP
+alias zg='zgrep --color';
+alias g='grep --color';
+alias current_desktop='xprop -root | egrep '\''^_NET_CURRENT_DESKTOP'\''';
+alias hist='history | grep --color';
+alias egrep='egrep --color';
+alias eg='egrep --color';
+alias grep='grep --color';
+alias pssim='ps -al | grep simv';
+alias fgrep='fgrep --color';
+alias f='fgrep --color';
+alias zgrep='zgrep --color';
+alias rgrep="grep -r --exclude-dir=.git  --exclude=*.swp" #common grep excludes when searching a project.
+alias cgrep="grep --color=always"
+
+# FIND
+alias find_file='find . -type f -name'
+alias find_file_link='find -L . -type f -name'
+alias find_folder='find . -type d -name'
+alias find_broken_links='find . -xtype l'
+alias find_delete_broken_links='find . -xtype l -delete'
+alias find_links='find . -type l'
+
+# FIND-GREP
+alias findlib='ldconfig -p | grep ';
+alias ovmfatal='find . -type f -exec zgrep --color -in "\(OVM_FATAL\|OVM_ERROR\)" {} +';
+alias ovminfo='find . -type f -exec zgrep --color -in "OVM_INFO" {} +';
+alias error-='find . -type f -exec zgrep --color "\(ERROR:\|Error-\|OVM_ERROR\|OVM_FATAL\|\[ERROR\]\|%ERROR-FATAL\)" {} +';
+alias cnst='find . -type f -exec zgrep --color -in "\(CNST-ICE\|CNST-SEOF\)" {} +';
+alias svaerror='find . -type f -exec zgrep --color -in "\(SVA_ERROR\|SVA ERROR\)" {} +';
+alias myinfo='find . -type f -exec zgrep --color -in "MY_INFO" {} +';
+alias ovmerror='find . -type f -exec zgrep --color -in "\(OVM_ERROR\|OVM_FATAL\)" {} +';
+
+# XRANDR RESOLUTIONS
+alias laptop='xrandr --size 1920x1080';
+alias cube='xrandr --size 3840x1080';
+alias cube2='xrandr --size 3840x1200';
+alias cube3='xrandr --size 3840x1160';
+alias home='xrandr --size 3840x2160';
+alias monitor='xrandr --size 1920x1200';
+
+# BASIC
+alias cd..='cd .. ; pwd';
+alias ..='cd .. ; pwd';
+alias ...='cd ../../ ; pwd';
+alias ....='cd ../../../ ; pwd';
+alias .....='cd ../../../../ ; pwd';
+alias    .4='cd ../../../../ ; pwd';
+alias    .5='cd ../../../../.. ; pwd';
+alias    .6='cd ../../../../../.. ; pwd';
+alias cdn='cd `(ls -1t | head -n 1)`';
+alias c='cd';
+# alias ls='ls --color'
+alias ll='ls -Clahp --color';
+alias lsg='ls -Clahp --color | grep ';
+# alias ll='ls -lph --color'
+alias cd_abs='cd `pwd -P`'
+alias lltr='ls -Clahtr --color';
+alias num_files_per_folder='ls -1 | xargs -i sh -c "echo {}; ls -1 {}| wc -l"'
+
+# Alias Management
+alias gali='alias | grep -i --color';
+alias vali='vim -o ~/.aliases-bash*';
+alias sali='. ~/.aliases-personal; . ~/.aliases-work';
+
+# compgen -c will list all the commands you could run.
+# compgen -a will list all the aliases you could run.
+# compgen -b will list all the built-ins you could run.
+# compgen -k will list all the keywords you could run.
+# compgen -A function will list all the functions you could run.
+# compgen -A function -abck will list all the above in one go.
+alias search_cmd='compgen -A function -abck | grep -i --color'
+
+# UTILITY
+alias cpuinfo='lscpu';
+alias psaux='ps aux';
+alias pwdx='pwd | xclip';
+alias psmem='ps auxf | sort -nr -k 4';
+alias maketar='tar -cvf';
+alias untarbz2='tar -xvjf';
+alias pscpu='ps auxf | sort -nr -k 3';
+alias psmem10='ps auxf | sort -nr -k 4 | head -10';
+alias pscpu10='ps auxf | sort -nr -k 3 | head -10';
+alias update_xterm='xrdb -merge ~/.Xresources';
+alias ls_lib=' /sbin/ldconfig -p | grep ';
+alias save_display='echo $DISPLAY > ~/current_display';
+alias restore_display='export DISPLAY=`cat ~/current_display`';
+
+# UNORGANIZED
+alias myxterm='xterm -fa '\''Inconsolata*g*'\'' -fs 11';
+alias mount='mount |column -t';
+alias meminfo='free -m -l -t';
+alias update_fonts='fc-cache -fv ; fc-cache -fv ~/.local/share/fonts';
+alias naut='nautilus --no-desktop . &';
+alias rpm_local='rpm2cpio to-install.rpm | cpio -idv';
+alias delete_passes='rm -rf `find . -noleaf -name run_test.pass | awk -F'\''[/]'\'' '\''{print $2}'\''`';
+alias untargz='tar -xvzf';
+alias permit='chmod a+r,a+x';
+alias ports='netstat -tulanp';
+alias untar='tar -xvf';
+alias h='history';
+alias ttf_fonts='fc-list :fontformat=TrueType -f "%{family}\n"';
+alias fpnx='fpn | xclip';
+alias tmux='tmux -u -2';
+geat() { find ~/cheat/ -type f -name *$1*; pt -i $1 ~/cheat/ ; }
+#vim -u $MY_HOME/.vimrc --cmd "set packpath+=$MY_HOME/.vim" --cmd "set runtimepath+=$MY_HOME/.vim"
+

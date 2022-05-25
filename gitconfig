@@ -1,0 +1,99 @@
+# personal git config nateharward@gmail.com
+[alias]
+   aliases = !git config --get-regexp 'alias.*' | colrm 1 6 | sed 's/[ ]/ = /'
+   author = !sh -c 'git log --author=\"$1\"' -
+   files-changed = diff-tree --no-commit-id --name-only -r
+   gk = "!sh -c 'gk.pl $1 $2 ' - "
+   lc = log origin..HEAD --name-status --no-merges
+   lchanges = "!csh -c 'git fetch $1 ; if($#argv>0) shift; git log FETCH_HEAD..HEAD $* -p '"
+   ldiffchanges = "!csh -c 'git fetch $1 ; if($#argv>0) shift; git diff FETCH_HEAD..HEAD $*'"
+   lfchanges = "!csh -c 'git fetch $1 ; if($#argv>0) shift; git log --pretty=\"format:\" --name-only FETCH_HEAD..HEAD $* | sort | uniq'"
+   parent = remote show origin
+   rc = log HEAD..origin --name-status --no-merges
+   rchanges = "!csh -c 'git fetch $1 ; if($#argv>0) shift; git log HEAD..FETCH_HEAD $*'"
+   root = rev-parse --show-toplevel
+   rdiffchanges = "!csh -c 'git fetch $1 ; if($#argv>0) shift; git diff HEAD..FETCH_HEAD $*'"
+   rfchanges = "!csh -c 'git fetch $1 ; if($#argv>0) shift; git log --pretty=\"format:\" --name-only HEAD..FETCH_HEAD $* | sort | uniq'"
+   updatenow = !sh -c 'updatenow.pl $1'
+   permission-reset = !git diff -p -R --no-color | grep -E \"^(diff|(old|new) mode)\" --color=never | git apply
+
+   ds = diff --staged      # git ds - diff your staged changes == review before committing.
+   st = status -sb         # smarter status - include tag and branch info
+   fup = log --since '1 day ago' --oneline --author nathan.a.harward@gmail.com # I know what you did yesterday - great for follow-ups
+   ls = log --pretty=format:"%C(yellow)%h %C(blue)%ad%C(red)%d %C(reset)%s%C(green) [%cn]" --decorate --date=short  # pretty one-line log with tags, branches and authors
+   lsv = log --pretty=format:"%C(yellow)%h %C(blue)%ad%C(red)%d %C(reset)%s%C(green) [%cn]" --decorate --date=short --numstat    # a verbose ls, shows changed files too
+   ds = diff --cached      # between HEAD and Index (added files)
+   dh = diff HEAD          # between HEAD and Working Tree (ignores whether or not the files was added/indexed) 
+
+# Soft, Mixed, and Hard Resets
+   rs = reset
+   rs1 = reset HEAD^ --soft
+   rs2 = reset HEAD^^ --soft
+   r = reset
+   r1 = reset HEAD^
+   r2 = reset HEAD^^
+   rh = reset --hard
+   rh1 = reset HEAD^ --hard
+   rh2 = reset HEAD^^ --hard
+
+# basic shortcuts
+   cp = cherry-pick -x
+   cl = clone
+   ci = commit
+   co = checkout
+   br = branch 
+   diff = diff --word-diff
+   dc = diff --cached
+
+# stash shortcuts
+   sl = stash list
+   sa = stash apply
+   ss = stash save
+
+# log related
+   l = log 
+   lh = log --graph
+   la = !git lh --date-order --all 2> /dev/null
+   lb = log --graph --simplify-by-decoration
+   lba = !git lb --all 
+   h = !git --no-pager log --graph -n 15
+   a = !git --no-pager la -n 15
+   lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+
+# merge shortcuts
+   mt = mergetool 
+   add-unmerged = "!f() { git ls-files --unmerged | cut -f2 | sort -u ; }; git add `f`"
+   edit-unmerged = "!f() { git ls-files --unmerged | cut -f2 | sort -u ; }; vim `f`"
+;   edit-unmerged = "!f() { git ls-files --unmerged | cut -f2 | sort -u ; }; FIXME pather to vim `f`"
+
+[color]
+    ui = auto
+[core]
+    editor = vim
+;    editor = FIXME path to vim
+;   pager = "vim -R -c 'set filetype=git nowrap' -c 'AnsiEsc' -"
+    pager = less -FRSX
+;     pager = vim - -R -c 'set filetype=git' -c 'set foldmethod=syntax'  
+    preloadindex = true
+    sharedrepository = 0640
+[diff]
+    algorithm = patience
+    mnemonicprefix = true
+    renames = true
+    tool = gvimdiff
+[grep]
+    lineNumber = true
+    extendRegexp = true
+[log]
+    decorate = true
+[merge]
+    tool = p4merge
+    conflictstyle = diff3
+    renamelimit = 999999
+[mergetool "p4merge"]
+    path = p4merge
+;    path = FIXME path to p4merge
+[oh-my-zsh]
+    hide-status = 1
+[bash-it]
+    hide-status = 1

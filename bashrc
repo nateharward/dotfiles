@@ -72,12 +72,12 @@ export THEME_CHECK_SUDO=FALSE
 # Load Bash It Settings and Bashit itself
 source $HOME/.bashrc.bashit
 
-if [ -r $HOME/.aliases-bash-personal ]; then
-   source $HOME/.aliases-bash-personal
+if [ -r $HOME/.aliases-personal ]; then
+   source $HOME/.aliases-personal
 fi
 
-if [ -r $HOME/.aliases-bash-work ]; then
-   source $HOME/.aliases-bash-work
+if [ -r $HOME/.aliases-work ]; then
+   source $HOME/.aliases-work
 fi
 
 # Load machine specific files

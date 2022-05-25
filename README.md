@@ -1,5 +1,7 @@
 # dotfiles
-nateharward's dotfiles
+nateharward's personal dotfiles
+
+Does not include any work-specific config
 
 Contains submodules, may want to clone with --recursive
 git clone --recursive https://github.com/nateharward/dotfiles
@@ -9,13 +11,19 @@ $ git submodule init
 $ git submodule update
 
 
-contains:
-* VIM .vimrc
-* TMUX .tmux.conf
-* BASH .bashrc.$USER (sourced by .bashrc)
+contains rc files that map to the following:
+* VIM     ~/.vimrc
+* TMUX    ~/.tmux.conf
+* BASH    ~/.bashrc.$USER (sourced by .bashrc)
+* XTERM   ~/.Xresources
+* TIG     ~/.tigrc
+* SCIM    ~/.scimrc
+* ALIASES ~/.aliases-personal (bash aliases sourced by .bashrc.$USER)
+* GIT     ~/.gitconfig
 
 todo
 * gitconfig
+* aliases
 
 #### Proxy setup notes
 

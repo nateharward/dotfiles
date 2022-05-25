@@ -188,21 +188,6 @@ let g:verilog_efm_level = "lint"
 """ PERF  Plug 'lervag/vimtex'
 """ PERF  let g:tex_flavor = 'latex'
 """ PERF  
-""" PERF  " TODO
-""" PERF  " Vim plugin optimized for the filetypes in the Cheetah2 design environment.
-""" PERF  Plug 'https://gitlab.devtools.intel.com/cbheitho/Cheetah2.vim'
-""" PERF  "
-""" PERF  
-""" PERF  " TODO
-""" PERF  " Vim auto-completion plugin for Tcl, especially Synopsys Tcl.
-""" PERF  Plug 'https://gitlab.devtools.intel.com/cbheitho/TclComplete'
-""" PERF  "
-""" PERF  
-""" PERF  " TODO
-""" PERF  " Vim auto-completion plugin for editing your .itools file
-""" PERF  Plug 'https://gitlab.devtools.intel.com/cbheitho/itools'
-""" PERF  "
-
 
 """
 
@@ -468,9 +453,7 @@ let g:airline_theme='base16_flat'
 Plug 'edkolev/tmuxline.vim'
 
 """ Work specific plugins - to keep specifics info out of my public dotfiles
-Plug '~/repos/vim-intel'
-Plug '~/repos/vim-hdk/'
-
+source ~/.vimrc.intel
 
 """ Run after everything else
 
@@ -883,11 +866,11 @@ endif
 " F2  :
 " F3  : Calculator 22
 " F4  :
-" F5  : Hdk Compile
-" F6  : Re-parse a simbuild log
+" F5  : Incremental Compile
+" F6  : Re-parse a log file
 " F7  : Toggle Code Folding
 " F8  : Buffers to Tabs
-" F9  : Hdk Clean Compile
+" F9  : Clean Compile
 " F10 : Toggle case invariant searching
 " F11 : OUTSIDE - terminal full screen
 " F12 : something weird (TODO look up)
@@ -896,11 +879,11 @@ endif
 " while editing, hit F3 in the insert mode and type expression to calulate
 imap <silent> <F3> <C-R>=string(eval(input("Calculate: ")))<CR>
 
-" F5 - Hdk Compile
-nnoremap <silent><F5> :HdkCompile<CR>
+" F5 - Incremental Compile
+" Incremental Compile based on loaded workflow
 
-" F6 - Re-parse a simbuild log stored at g:hdk#logname
-nnoremap <silent><F6> :HdkReload<CR>
+" F6 - Re-parse a logfile
+" Reparse logfile based on loaded workflow
 
 " F7 - Toggle Code Folding
 " http://vim.wikia.com/wiki/Folding?useskin=monobook
@@ -916,8 +899,8 @@ vnoremap <F7> zf
 let notabs = 0
 nnoremap <silent> <F8> :let notabs=!notabs<Bar>:if notabs<Bar>:tabo<Bar>:else<Bar>:tab ball<Bar>:tabn<Bar>:endif<CR>
 
-" F9 - Hdk Clean Compile
-nnoremap <silent> <F9> :HdkCleanCompile<CR>
+" F9 - Clean Compile
+" Clean Compile based on loaded workflow
 
 " F10 - Toggle Smartcase
 nnoremap <F10> :set smartcase!<CR>
